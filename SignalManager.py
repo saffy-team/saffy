@@ -3,6 +3,7 @@ from obci_readmanager.signal_processing.read_manager import ReadManager
 
 from .plugins import *
 
+
 plugins = PluginManager.__subclasses__()
 
 
