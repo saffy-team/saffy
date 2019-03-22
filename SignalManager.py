@@ -3,7 +3,7 @@ from obci_readmanager.signal_processing.read_manager import ReadManager
 
 from .plugins import *
 
-plugins = p.PluginManager.__subclasses__()
+plugins = PluginManager.__subclasses__()
 
 
 class SignalManager(*plugins):
