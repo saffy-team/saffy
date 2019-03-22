@@ -1,8 +1,9 @@
 import numpy as np
 from obci_readmanager.signal_processing.read_manager import ReadManager
 
-import plugins as p
-plugins = p.PluginManager.__subclasses__()
+from plugins import *
+
+plugins = PluginManager.__subclasses__()
 
 
 class SignalManager(*plugins):
@@ -91,6 +92,7 @@ class SignalManager(*plugins):
 			't': self.t,
 			'tags': self.tags
 		})
+
 
 if __name__ == '__main__':
 	SignalManager()
