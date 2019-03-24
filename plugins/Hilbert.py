@@ -6,7 +6,7 @@ from .PluginManager import PluginManager
 
 class HilbertPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
-		super().__init__()
+		super().__init__(*args, **kwargs)
 		self.hilbert = {}
 
 	def hilbert_transform(self, phase_freq=0):
