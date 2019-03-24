@@ -22,8 +22,8 @@ Install dependencies
 
 ## Usage
 ```python
-import Sappy
-sig = Sappy.SignalManager(generator=signal_data)
+import Saffy
+sig = Saffy.SignalManager(generator=signal_data)
 ```
 
 #### Basic SignalManager instance structure
@@ -78,9 +78,9 @@ Calculating the Hilbert Transform
 You might want to add some custom features.
 
 ```python
-import Sappy
+import Saffy
 
-class CustomPlugin(Sappy.PluginManager):
+class CustomPlugin(Saffy.PluginManager):
     def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
         self.custom_param = 'some value'
@@ -89,15 +89,15 @@ class CustomPlugin(Sappy.PluginManager):
         # do something
         pass
         
-Sappy.SignalManager.register_plugin(CustomPlugin)
+Saffy.SignalManager.register_plugin(CustomPlugin)
 
-sig = Sappy.SignalManager(generator=signal_data)
+sig = Saffy.SignalManager(generator=signal_data)
 
 sig.custom_function()
 ```
 
 ## Example
-A short example of how to use Sappy for EEG data analysis.
+A short example of how to use Saffy for EEG data analysis.
 
 ```python
 def generate_signal():
@@ -136,7 +136,7 @@ def generate_signal():
   
   return data
 
-EEG = Sappy.SignalManager(generator=generate_signal())
+EEG = Saffy.SignalManager(generator=generate_signal())
 
 EEG.set_tags_from_channel('d1')
 EEG.remove_channel('d1')
