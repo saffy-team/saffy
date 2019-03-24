@@ -8,7 +8,8 @@ sns.set_context("talk", font_scale=1.4)
 
 
 class GraphicsPlugin(PluginManager):
-	__metaclass__ = PluginManager
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
 
 	def spectrum_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')

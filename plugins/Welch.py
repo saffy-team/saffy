@@ -4,7 +4,7 @@ from .PluginManager import PluginManager
 
 
 class WelchPlugin(PluginManager):
-	def __init__(self):
+	def __init__(self, *args, **kwargs):
 		super().__init__()
 		self.spectrum = []
 		self.spectrum_freqs = []

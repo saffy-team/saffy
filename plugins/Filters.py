@@ -4,6 +4,9 @@ from .PluginManager import PluginManager
 
 
 class FiltersPlugin(PluginManager):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
 	def _butter_lowpass(self, cutoff, order=5):
 		nyq = 0.5 * self.fs
 		normal_cutoff = cutoff / nyq

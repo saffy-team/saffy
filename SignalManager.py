@@ -7,9 +7,9 @@ plugins = PluginManager.__subclasses__()
 
 
 class SignalManager(*plugins):
-	def __init__(self, name='', **kwargs):
+	def __init__(self, name='', *args, **kwargs):
 		for plugin in SignalManager.__bases__:
-			super(plugin, self).__init__()
+			super(plugin, self).__init__(*args, **kwargs)
 
 		self.name = name
 

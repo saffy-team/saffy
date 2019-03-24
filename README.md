@@ -81,8 +81,8 @@ You might want to add some custom features.
 import Sappy
 
 class CustomPlugin(Sappy.PluginManager):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
         self.custom_param = 'some value'
         
     def custom_function(self):

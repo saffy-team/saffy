@@ -1,6 +1,6 @@
 
 class PluginManager(object):
-	def __init__(self):
+	def __init__(self, *args, **kwargs):
 		self.fs = 0
 		self.num_channels = 0
 		self.channel_names = []
