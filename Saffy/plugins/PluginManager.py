@@ -10,6 +10,7 @@ class PluginManager(object):
 		self.tags = []
 		self.spectrum = []
 		self.spectrum_freqs = []
+		self.phase = []
 
 	def __repr__(self):
 		return 'Plugin'

@@ -8,8 +8,12 @@ class FourierPlugin(PluginManager):
 		super().__init__(*args, **kwargs)
 
 	def fourier_transform(self):
-		self.spectrum = np.fft.fft(self.data)
-		self.spectrum_freqs = np.fft.fftfreq(self.data.shape[2], 1/self.fs)
+		transform = np.fft.rfft(self.data)
+
+		self.spectrum = abs(transform) ** 2
+		self.phase = np.angle(transform) + np.pi / 2
+
+		self.spectrum_freqs = np.fft.rfftfreq(self.data.shape[2], 1/self.fs)
 
 	def __str__(self):
 		return 'Fourier'
