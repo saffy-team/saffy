@@ -93,7 +93,9 @@ class SignalManager(*plugins):
 
 	@classmethod
 	def register_plugin(cls, plugin):
-		cls.__bases__ = (*cls.__bases__, plugin)
+		bases = (*cls.__bases__, plugin)
+		bases = set(bases)
+		cls.__bases__ = tuple(bases)
 
 
 if __name__ == '__main__':

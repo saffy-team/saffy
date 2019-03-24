@@ -11,7 +11,7 @@ class GraphicsPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-	def spectrum_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+	def graphics_spectrum_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
 
 		for epoch in self.spectrum:
@@ -59,7 +59,7 @@ class GraphicsPlugin(PluginManager):
 
 				fig.patch.set_facecolor('#ffffff')
 
-	def time_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+	def graphics_time_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
 
 		for epoch in self.data:

@@ -77,13 +77,22 @@ Calculating the Hilbert Transform
 ### Creating Custom Plugins
 You might want to add some custom features.
 
+The proposed convention for plugin development is the following.
+All data that is to be stored extra, should be stored in the form of a dictionary assigned to a variable of the same name
+as the plugin.
+
+Plugin functions should be preceded by the plugin name. 
+
 ```python
 import Saffy
 
 class CustomPlugin(Saffy.PluginManager):
     def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-        self.custom_param = 'some value'
+        super().__init__(*args, **kwargs)
+
+        self.custom = {
+            'param': 'some value'
+        }
         
     def custom_function(self):
         # do something
@@ -189,4 +198,3 @@ plt.close()
 If you like the project and want to add something to it then please create a pull request.
 - The title should shortly summarize the goal of your addition
 - In the description go in depth with the changes you have made and why.
-
