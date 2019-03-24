@@ -1,7 +1,7 @@
 import numpy as np
 from obci_readmanager.signal_processing.read_manager import ReadManager
 
-from .plugins import *
+from Saffy.plugins import *
 
 plugins = PluginManager.__subclasses__()
 
@@ -96,6 +96,12 @@ class SignalManager(*plugins):
 		bases = (*cls.__bases__, plugin)
 		bases = set(bases)
 		cls.__bases__ = tuple(bases)
+
+	def __str__(self):
+		return 'Signal Manager'
+
+	def __repr__(self):
+		return 'Signal Manager'
 
 
 if __name__ == '__main__':

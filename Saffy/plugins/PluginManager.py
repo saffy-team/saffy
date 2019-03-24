@@ -8,6 +8,8 @@ class PluginManager(object):
 		self.t = []
 		self.epochs = 0
 		self.tags = []
+		self.spectrum = []
+		self.spectrum_freqs = []
 
 	def __repr__(self):
 		return 'Plugin'
