@@ -6,6 +6,9 @@ aims to encourage building modular code among scientists and data analysts. It p
 storage and a pipeline for analysis.
 
 ## Install
+
+`pip3 install Saffy`
+
 ###### From Source
 Using a virtualenv is recommended! 
 
@@ -16,9 +19,6 @@ Download the package to your project directory
 Install dependencies
 
 `pip3 install -r ./Saffy/requirements.txt`
-
-###### pip
-*Coming soon*
 
 ## Usage
 ```python
