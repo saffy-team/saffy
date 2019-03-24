@@ -181,14 +181,14 @@ fig, ax = plt.subplots(
     figsize=(10, 10)
 )
 
-PRE_EEG.spectrum_plot(
+PRE_EEG.graphics_spectrum_plot(
     fig,
     ax,
     'Change',
     label='Pre'
 )
 
-POST_EEG.spectrum_plot(
+POST_EEG.graphics_spectrum_plot(
     fig,
     ax,
     color='#0000ff',
