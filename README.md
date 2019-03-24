@@ -15,7 +15,7 @@ Download the package to your project directory
 
 Install dependencies
 
-`pip3 install -r ./Sappy/requirements.txt`
+`pip3 install -r ./Saffy/requirements.txt`
 
 ###### pip
 *Coming soon*
