@@ -5,6 +5,21 @@ A simple signal analysis tool, which aims at clarity of code and reproducibility
 aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
 storage and a pipeline for analysis.
 
+## Install
+###### From Source
+Using a virtualenv is recommended! 
+
+Download the package to your project directory
+
+`git clone https://github.com/PPierzc/Sappy.git`
+
+Install dependencies
+
+`pip3 install -r ./Sappy/requirements.txt`
+
+###### pip
+*Coming soon*
+
 ## Usage
 ```python
 import Sappy
