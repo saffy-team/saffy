@@ -11,7 +11,7 @@ Using a virtualenv is recommended!
 
 Download the package to your project directory
 
-`git clone https://github.com/PPierzc/Sappy.git`
+`git clone https://github.com/PPierzc/Saffy.git`
 
 Install dependencies
 
