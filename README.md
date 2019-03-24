@@ -33,6 +33,8 @@ class CustomPlugin(Sappy.PluginManager):
     def custom_function(self):
         # do something
         pass
+        
+Sappy.SignalManager.register_plugin(CustomPlugin)
 
 sig = Sappy.SignalManager(generator=signal_data)
 

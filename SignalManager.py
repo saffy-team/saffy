@@ -3,13 +3,12 @@ from obci_readmanager.signal_processing.read_manager import ReadManager
 
 from .plugins import *
 
+plugins = PluginManager.__subclasses__()
 
-class SignalManager(*PluginManager.__subclasses__()):
+
+class SignalManager(*plugins):
 	def __init__(self, name='', **kwargs):
-		plugins = PluginManager.__subclasses__()
-		print('Using Plugins:', plugins)
-
-		for plugin in plugins:
+		for plugin in SignalManager.__bases__:
 			super(plugin, self).__init__()
 
 		self.name = name
@@ -91,6 +90,10 @@ class SignalManager(*PluginManager.__subclasses__()):
 			't': self.t,
 			'tags': self.tags
 		})
+
+	@classmethod
+	def register_plugin(cls, plugin):
+		cls.__bases__ = (*cls.__bases__, plugin)
 
 
 if __name__ == '__main__':
