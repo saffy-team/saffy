@@ -1,1 +1,12 @@
 .idea/
+
+lib/
+dist/
+include/
+
+bin/
+pip-selfcheck.json
+
+.Python
+
+
