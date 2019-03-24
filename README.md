@@ -1,7 +1,7 @@
-# Sappy
-Signal Analysis &amp; Processing in Python
+# Saffy
+Signal Analysis Framework For You
 
-A simple signal analysis tool, which aims at clarity of code and reproducibility of solutions. The plugin architecture
+A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
 aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
 storage and a pipeline for analysis.
 
