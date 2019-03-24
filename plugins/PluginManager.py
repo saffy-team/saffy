@@ -1,5 +1,3 @@
-import sys
-
 
 class PluginManager(object):
 	def __init__(self):
