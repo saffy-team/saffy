@@ -11,7 +11,7 @@ class GraphicsPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-	def graphics_spectrum_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+	def graphics_spectrum_plot(self, fig, ax, title='', ylabel='', xlabel='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
 
 		for epoch in self.spectrum:
@@ -37,7 +37,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.5,
 					0.05,
-					'Cześtotliwość [Hz]',
+					xlabel,
 					ha='center',
 					fontsize=20
 				)
@@ -51,7 +51,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.04,
 					0.5,
-					'Amplituda [$\mu$V]',
+					ylabel,
 					va='center',
 					rotation='vertical',
 					fontsize=20
@@ -59,7 +59,7 @@ class GraphicsPlugin(PluginManager):
 
 				fig.patch.set_facecolor('#ffffff')
 
-	def graphics_time_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+	def graphics_time_plot(self, fig, ax, title='', ylabel='', xlabel='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
 
 		for epoch in self.data:
@@ -92,7 +92,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.5,
 					0.05,
-					'Czas [s]',
+					xlabel,
 					ha='center',
 					fontsize=20
 				)
@@ -106,7 +106,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.04,
 					0.5,
-					'Wartość Sygnału [$\mu$V]',
+					ylabel,
 					va='center',
 					rotation='vertical',
 					fontsize=20
