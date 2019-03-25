@@ -7,14 +7,14 @@ with open("README.md", "r") as fh:
 	long_description = fh.read()
 
 setup(
-	name='Saffy',
+	name='saffy',
 	packages=find_packages(),
 	version='0.1.9',
 	license='MIT',
 	description='Signal Analysis Framework For You',
 	author='Paweł A. Pierzchlewicz',
 	author_email='paul@teacode.io',
-	url='https://github.com/PPierzc/Saffy',
+	url='https://github.com/PPierzc/saffy',
 	keywords=['python', 'signal', 'analysis', 'EEG', 'neuroinformatics'],
 	install_requires=requirements,
 	long_description=long_description,

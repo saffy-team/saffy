@@ -1,7 +1,7 @@
 import numpy as np
 from obci_readmanager.signal_processing.read_manager import ReadManager
 
-from Saffy.plugins import *
+from saffy.plugins import *
 
 plugins = PluginManager.__subclasses__()
 
