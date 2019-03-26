@@ -36,8 +36,9 @@ sig = saffy.SignalManager(generator=signal_data)
 | t | time vector |
 | epochs | number of epochs |
 | tags | position of tags in signal |
-| spectrum | vector of spectrum |
+| spectrum | matrix of spectrum |
 | spectrum_freqs| vector of frequencies |
+| phase | matrix of phase |
 
 #### SignalManager init function
 It takes one labelled argument: `generator` or `filename`.
