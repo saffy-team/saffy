@@ -3,6 +3,8 @@ import unittest
 from .. import PluginManager
 from .. import SignalManager
 
+from .mocks import sine_wave
+
 
 class TestSignalManager(unittest.TestCase):
     @staticmethod
@@ -28,6 +30,15 @@ class TestSignalManager(unittest.TestCase):
 
         sig = SignalManager()
         self.assertEqual([], sig.custom_function())
+
+    def add_history_test(self):
+        print('add_history_test')
+
+        sig = SignalManager(generator=sine_wave())
+
+        sig.remove_channel('sine', )
+
+        self.assertEqual(["remove_channel('sine', )"], sig.history)
 
 
 if __name__ == '__main__':

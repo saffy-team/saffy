@@ -7,7 +7,6 @@ class TestPluginManager(unittest.TestCase):
 	@staticmethod
 	def smoke_test():
 		PluginManager()
-		assert 1 == 1
 
 	def custom_plugin_test(self):
 		class TestPlugin(PluginManager):

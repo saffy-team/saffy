@@ -1,4 +1,7 @@
 import numpy as np
+
+import types
+
 from obci_readmanager.signal_processing.read_manager import ReadManager
 
 from saffy.plugins import *
@@ -42,6 +45,23 @@ class SignalManager(*plugins):
 
 			self.epochs = generator['epochs']
 			self.tags = generator['tags']
+
+	def __getattribute__(self, attr):
+		def call_history(method):
+			def out(*args, **kwargs):
+				_args = [arg.__repr__() for arg in args]
+				_kwargs = [f"{key}={kwargs[key]}" for key in kwargs]
+				self.history.append(f'{method.__name__}({",".join(_args)}, {",".join(_kwargs)})')
+				return method(*args, **kwargs)
+
+			return out
+
+		method = object.__getattribute__(self, attr)
+
+		if type(method) == types.MethodType:
+			method = call_history(method)
+
+		return method
 
 	def set_tags_from_channel(self, channel_name):
 		tag_channel = self.data[:, self.channel_names.index(channel_name)]

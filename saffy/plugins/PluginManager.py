@@ -11,6 +11,7 @@ class PluginManager(object):
 		self.spectrum = []
 		self.spectrum_freqs = []
 		self.phase = []
+		self.history = []
 
 	def __repr__(self):
 		return 'Plugin'
