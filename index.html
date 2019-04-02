@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Saffy: Signal Analysis made simple - Saffy</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Saffy: Signal Analysis made simple";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Saffy</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Saffy: Signal Analysis made simple</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#saffy-signal-analysis-made-simple">Saffy: Signal Analysis made simple</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#a-high-level-signal-analysis-framework">A High-Level Signal Analysis Framework</a></li>
+        
+            <li><a class="toctree-l3" href="#install">Install</a></li>
+        
+            <li><a class="toctree-l3" href="#usage">Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#plugins">Plugins</a></li>
+        
+            <li><a class="toctree-l3" href="#example">Example</a></li>
+        
+            <li><a class="toctree-l3" href="#contributing">Contributing</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Saffy</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Saffy: Signal Analysis made simple</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="saffy-signal-analysis-made-simple">Saffy: Signal Analysis made simple</h1>
+<p><img src="/saffy_logo.png" width="250px" alt="Saffy Logo" /></p>
+<h2 id="a-high-level-signal-analysis-framework">A High-Level Signal Analysis Framework</h2>
+<p>A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
+aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
+storage and a pipeline for analysis.</p>
+<h2 id="install">Install</h2>
+<p><code>pip3 install saffy</code></p>
+<h6 id="from-source">From Source</h6>
+<p>Using a virtualenv is recommended! </p>
+<p>Download the package to your project directory</p>
+<p><code>git clone https://github.com/PPierzc/saffy.git</code></p>
+<p>Install dependencies</p>
+<p><code>pip3 install -r ./saffy/requirements.txt</code></p>
+<h2 id="usage">Usage</h2>
+<pre><code class="python">import saffy
+sig = saffy.SignalManager(generator=signal_data)
+</code></pre>
+
+<h4 id="basic-signalmanager-instance-structure">Basic SignalManager instance structure</h4>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs</td>
+<td>sampling frequency</td>
+</tr>
+<tr>
+<td>num_channels</td>
+<td>number of channels</td>
+</tr>
+<tr>
+<td>channel_names</td>
+<td>name for each channel</td>
+</tr>
+<tr>
+<td>data</td>
+<td>the signal in the structure of (epoch x channel x signal)</td>
+</tr>
+<tr>
+<td>t</td>
+<td>time vector</td>
+</tr>
+<tr>
+<td>epochs</td>
+<td>number of epochs</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>position of tags in signal</td>
+</tr>
+<tr>
+<td>spectrum</td>
+<td>matrix of spectrum</td>
+</tr>
+<tr>
+<td>spectrum_freqs</td>
+<td>vector of frequencies</td>
+</tr>
+<tr>
+<td>phase</td>
+<td>matrix of phase</td>
+</tr>
+</tbody>
+</table>
+<h4 id="signalmanager-init-function">SignalManager init function</h4>
+<p>It takes one labelled argument: <code>generator</code> or <code>filename</code>.</p>
+<h6 id="generator">Generator</h6>
+<p>A dictionary of the structure</p>
+<pre><code>data = {
+
+      'fs': # float,
+      'num_channels': # integer,
+      'channel_names': # list of strings,
+      'epochs': # integer,
+      't': # time array,
+      'tags': # list,
+      'data': # Signal Matrix
+  }
+</code></pre>
+
+<pre><code class="python">saffy.SignalManager(generator=data)
+</code></pre>
+
+<h6 id="filename">Filename</h6>
+<p>The name of the file generated by Svarog. 3 files eg. <code>data.raw</code>, <code>data.xml</code>, <code>data.tag</code></p>
+<pre><code class="python">saffy.SignalManager(filename='data')
+</code></pre>
+
+<h2 id="plugins">Plugins</h2>
+<p>Plugins are classes that inherit from the PluginManager. They extend the functionality of the basic Signal Manager.
+Some plugins are provided out of the box</p>
+<h4 id="filters">Filters</h4>
+<p>Adds basic filters</p>
+<h4 id="graphics">Graphics</h4>
+<p>Adds functions to display the signal data</p>
+<h4 id="welch">Welch</h4>
+<p>Calculating the Welch Spectrum</p>
+<h4 id="hilbert">Hilbert</h4>
+<p>Calculating the Hilbert Transform</p>
+<h3 id="creating-custom-plugins">Creating Custom Plugins</h3>
+<p>You might want to add some custom features.</p>
+<p>The proposed convention for plugin development is the following.
+All data that is to be stored extra, should be stored in the form of a dictionary assigned to a variable of the same name
+as the plugin.</p>
+<p>Plugin functions should be preceded by the plugin name. </p>
+<pre><code class="python">import saffy
+
+class CustomPlugin(saffy.PluginManager):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.custom = {
+            'param': 'some value'
+        }
+
+    def custom_function(self):
+        # do something
+        pass
+
+saffy.SignalManager.register_plugin(CustomPlugin)
+
+sig = saffy.SignalManager(generator=signal_data)
+
+sig.custom_function()
+</code></pre>
+
+<h2 id="example">Example</h2>
+<p>A short example of how to use saffy for EEG data analysis.</p>
+<pre><code class="python">def generate_signal():
+  data = {
+      'fs': 512,
+      'num_channels': 3,
+      'channel_names': ['C3', 'C4', 'd1'],
+      'epochs': 1
+  }
+
+  T = 20
+  t = np.arange(0, T, 1 / data['fs'])
+
+  mu_freq = 10
+  beta_freq = 23
+  net_freq = 50
+
+  data['data'] = np.zeros((data['epochs'], data['num_channels'], len(t)))
+
+  for epoch in range(data['epochs']):
+    data['data'][epoch][0] += (0.1 * t + 0.1) * sin(t, mu_freq)
+    data['data'][epoch][0] += (0.1 * t + 0.1) * sin(t, beta_freq)
+    data['data'][epoch][0] += sin(t, net_freq)
+    data['data'][epoch][0] += 0.3 * noise(t)
+
+    data['data'][epoch][1] += (0.1 * t + 0.1) * sin(t, mu_freq)
+    data['data'][epoch][1] += (0.1 * t + 0.1) * sin(t, beta_freq)
+    data['data'][epoch][1] += sin(t, net_freq)
+    data['data'][epoch][1] += 0.3 * noise(t)
+
+    data['data'][epoch][2][::5*data['fs']] = 1
+    data['data'][epoch][2][0] = 0
+
+  data['t'] = t
+  data['tags'] = []
+
+  return data
+
+EEG = saffy.SignalManager(generator=generate_signal())
+
+EEG.set_tags_from_channel('d1')
+EEG.remove_channel('d1')
+
+PRE_EEG = EEG.copy('pre')
+PRE_EEG.set_epochs_from_tags(-4, -2)
+
+PRE_EEG.welch_spectrum()
+PRE_EEG.spectrum = np.mean(PRE_EEG.spectrum, axis=0)
+PRE_EEG.spectrum = np.reshape(PRE_EEG.spectrum, (1, *PRE_EEG.spectrum.shape))
+
+POST_EEG = EEG.copy('post')
+POST_EEG.set_epochs_from_tags(0.5, 2.5)
+
+POST_EEG.welch_spectrum()
+POST_EEG.spectrum = np.mean(POST_EEG.spectrum, axis=0)
+POST_EEG.spectrum = np.reshape(POST_EEG.spectrum, (1, *POST_EEG.spectrum.shape))
+
+fig, ax = plt.subplots(
+    nrows=max([PRE_EEG.num_channels, POST_EEG.num_channels]),
+    ncols=1,
+    sharex=True,
+    sharey=True,
+    figsize=(10, 10)
+)
+
+PRE_EEG.graphics_spectrum_plot(
+    fig,
+    ax,
+    'Change',
+    label='Pre'
+)
+
+POST_EEG.graphics_spectrum_plot(
+    fig,
+    ax,
+    color='#0000ff',
+    label='Post'
+)
+
+for a in ax:
+  a.legend()
+
+plt.show()
+plt.close()
+</code></pre>
+
+<h2 id="contributing">Contributing</h2>
+<p>If you like the project and want to add something to it then please create a pull request.
+- The title should shortly summarize the goal of your addition
+- In the description go in depth with the changes you have made and why.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2019-04-02 20:50:23
+-->
