@@ -1,5 +1,9 @@
-# Saffy
-Signal Analysis Framework For You
+# Saffy: Signal Analysis made simple
+![Saffy logo](saffy_logo.png)
+
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
+
+## A High-Level Signal Analysis Framework
 
 A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
 aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
