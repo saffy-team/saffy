@@ -1,0 +1,4 @@
+site_name: Saffy
+theme:
+  name: 'readthedocs'
+extra_css: [extra.css]
