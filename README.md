@@ -3,6 +3,8 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
 
+[Documentation](https://saffy-team.github.io/saffy/)
+
 ## A High-Level Signal Analysis Framework
 
 A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
