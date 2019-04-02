@@ -76,6 +76,21 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Plugins</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="Plugins/Hilbert/">Hilbert</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="Plugins/Welch/">Welch</a>
+                </li>
+    </ul>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -242,46 +257,16 @@ sig.custom_function()
 
 <h2 id="example">Example</h2>
 <p>A short example of how to use saffy for EEG data analysis.</p>
-<pre><code class="python">def generate_signal():
-  data = {
-      'fs': 512,
-      'num_channels': 3,
-      'channel_names': ['C3', 'C4', 'd1'],
-      'epochs': 1
-  }
+<pre><code class="python">EEG = saffy.SignalManager(filename=&quot;path/to/file&quot;)
 
-  T = 20
-  t = np.arange(0, T, 1 / data['fs'])
+EEG.extract_channels(['C3', 'C4', 'trig'])
 
-  mu_freq = 10
-  beta_freq = 23
-  net_freq = 50
+EEG.set_tags_from_channel('trig')
 
-  data['data'] = np.zeros((data['epochs'], data['num_channels'], len(t)))
+EEG.remove_channel('trig')
 
-  for epoch in range(data['epochs']):
-    data['data'][epoch][0] += (0.1 * t + 0.1) * sin(t, mu_freq)
-    data['data'][epoch][0] += (0.1 * t + 0.1) * sin(t, beta_freq)
-    data['data'][epoch][0] += sin(t, net_freq)
-    data['data'][epoch][0] += 0.3 * noise(t)
-
-    data['data'][epoch][1] += (0.1 * t + 0.1) * sin(t, mu_freq)
-    data['data'][epoch][1] += (0.1 * t + 0.1) * sin(t, beta_freq)
-    data['data'][epoch][1] += sin(t, net_freq)
-    data['data'][epoch][1] += 0.3 * noise(t)
-
-    data['data'][epoch][2][::5*data['fs']] = 1
-    data['data'][epoch][2][0] = 0
-
-  data['t'] = t
-  data['tags'] = []
-
-  return data
-
-EEG = saffy.SignalManager(generator=generate_signal())
-
-EEG.set_tags_from_channel('d1')
-EEG.remove_channel('d1')
+EEG.butter_highpass_filter_v2(1, 2)
+EEG.cheb2_notch_filter_v2(50, order=1, rs=3, width=0.3, btype='bandstop')
 
 PRE_EEG = EEG.copy('pre')
 PRE_EEG.set_epochs_from_tags(-4, -2)
@@ -296,34 +281,6 @@ POST_EEG.set_epochs_from_tags(0.5, 2.5)
 POST_EEG.welch_spectrum()
 POST_EEG.spectrum = np.mean(POST_EEG.spectrum, axis=0)
 POST_EEG.spectrum = np.reshape(POST_EEG.spectrum, (1, *POST_EEG.spectrum.shape))
-
-fig, ax = plt.subplots(
-    nrows=max([PRE_EEG.num_channels, POST_EEG.num_channels]),
-    ncols=1,
-    sharex=True,
-    sharey=True,
-    figsize=(10, 10)
-)
-
-PRE_EEG.graphics_spectrum_plot(
-    fig,
-    ax,
-    'Change',
-    label='Pre'
-)
-
-POST_EEG.graphics_spectrum_plot(
-    fig,
-    ax,
-    color='#0000ff',
-    label='Post'
-)
-
-for a in ax:
-  a.legend()
-
-plt.show()
-plt.close()
 </code></pre>
 
 <h2 id="contributing">Contributing</h2>
@@ -334,6 +291,13 @@ plt.close()
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Plugins/Hilbert/" class="btn btn-neutral float-right" title="Hilbert">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>
@@ -358,6 +322,8 @@ plt.close()
       
       
       
+        <span style="margin-left: 15px"><a href="Plugins/Hilbert/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
     </span>
 </div>
     <script>var base_url = '.';</script>
@@ -369,5 +335,5 @@ plt.close()
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-04-02 21:19:58
+Build Date UTC : 2019-04-02 21:54:17
 -->
