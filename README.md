@@ -1,5 +1,5 @@
 # Saffy: Signal Analysis made simple
-![Saffy logo](saffy_logo.png)
+![Saffy logo](saffy_logo.png | width=250)
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
 
