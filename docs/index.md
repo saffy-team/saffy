@@ -1,5 +1,6 @@
-# Saffy: Signal Analysis made simple
-<img src="/saffy_logo.png" width="250px" alt="Saffy Logo" />
+# Saffy
+
+<img src="https://res.cloudinary.com/ppierzc/image/upload/v1554243272/saffy_logo_hc4atf.png" width="250px" alt="Saffy Logo" />
 
 
 ## A High-Level Signal Analysis Framework

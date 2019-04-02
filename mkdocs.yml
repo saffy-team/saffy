@@ -2,3 +2,4 @@ site_name: Saffy
 theme:
   name: 'readthedocs'
 extra_css: [extra.css]
+site_favicon: favicon.ico
