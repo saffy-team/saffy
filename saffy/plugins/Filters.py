@@ -21,7 +21,7 @@ class FiltersPlugin(PluginManager):
 		else:
 			self.data = filtfilt(b, a, self.data)
 
-	def _cheb2_notch_v2(
+	def _cheb2_notch(
 			self,
 			cutoff,
 			order=5,
@@ -45,7 +45,7 @@ class FiltersPlugin(PluginManager):
 
 		return b, a
 
-	def cheb2_notch_filter_v2(
+	def cheb2_notch_filter(
 			self,
 			cutoff,
 			order=5,
@@ -54,14 +54,14 @@ class FiltersPlugin(PluginManager):
 			method=None,
 			btype='bandstop'
 	):
-		b, a = self._cheb2_notch_v2(cutoff, order, rs, width, btype=btype)
+		b, a = self._cheb2_notch(cutoff, order, rs, width, btype=btype)
 
 		if method:
 			self.data = method(b, a, self.data)
 		else:
 			self.data = filtfilt(b, a, self.data)
 
-	def _butter_highpass_v2(
+	def _butter_highpass(
 			self,
 			cutoff,
 			order=5
@@ -71,13 +71,13 @@ class FiltersPlugin(PluginManager):
 		b, a = butter(order, normal_cutoff, btype='high', analog=False)
 		return b, a
 
-	def butter_highpass_filter_v2(
+	def butter_highpass_filter(
 			self,
 			cutoff,
 			order=5,
 			method=None
 	):
-		b, a = self._butter_highpass_v2(cutoff, order=order)
+		b, a = self._butter_highpass(cutoff, order=order)
 
 		if method:
 			self.data = method(b, a, self.data)
