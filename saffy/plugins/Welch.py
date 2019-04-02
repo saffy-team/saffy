@@ -1,4 +1,5 @@
 import scipy.signal as ss
+import numpy as np
 
 from .PluginManager import PluginManager
 
@@ -12,6 +13,15 @@ class WelchPlugin(PluginManager):
 
 		self.spectrum = spectrum
 		self.spectrum_freqs = spectrum_freqs
+
+	def welch_mean_spectrum(self):
+		spectrum_freqs, spectrum = ss.welch(self.data, self.fs)
+
+		self.spectrum = spectrum
+		self.spectrum_freqs = spectrum_freqs
+
+		self.spectrum = np.mean(self.spectrum, axis=0)
+		self.spectrum = np.reshape(self.spectrum, (1, *self.spectrum.shape))
 
 	def __str__(self):
 		return 'Welch'

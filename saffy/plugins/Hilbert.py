@@ -13,7 +13,7 @@ class HilbertPlugin(PluginManager):
 		self.hilbert['data'] = ss.hilbert(self.data)
 
 		self.hilbert['amplitude'] = np.abs(self.hilbert['data'])
-		self.hilbert['power'] = self.hilbert['amplitude']
+		self.hilbert['power'] = self.hilbert['amplitude']**2
 
 		self.hilbert['phase'] = np.unwrap(np.angle(self.hilbert['data']))
 		# Składa sie z czynników:
