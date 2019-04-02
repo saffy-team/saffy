@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 setup(
 	name='saffy',
 	packages=find_packages(),
-	version='0.1.1',
+	version='0.1.12-dev',
 	license='MIT',
 	description='Signal Analysis Framework For You',
 	author='Paweł A. Pierzchlewicz',

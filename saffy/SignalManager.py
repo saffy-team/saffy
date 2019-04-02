@@ -27,6 +27,8 @@ class SignalManager(*plugins):
 			self.channel_names = mgr.get_param("channels_names")
 
 			self.data = mgr.get_microvolt_samples()
+			self.data = np.reshape(self.data, (1, *self.data.shape))
+
 			self.t = np.arange(self.data.shape[1]) / self.fs
 
 			self.epochs = 1
@@ -70,6 +72,10 @@ class SignalManager(*plugins):
 
 		self.tags = np.where(tag_channel > 0.9)[1]
 
+		self.tags = self.tags[
+			np.concatenate(([0], np.where(np.diff(self.tags) > 1)[0] + 1))
+		]
+
 	def set_epochs_from_tags(self, low, high):
 		self.t = np.arange(low, high, 1 / self.fs)
 
@@ -92,6 +98,16 @@ class SignalManager(*plugins):
 		del self.channel_names[channel_id]
 		self.num_channels -= 1
 
+	def extract_channels(self, channel_names):
+		channel_ids = [self.channel_names.index(channel_name) for channel_name in channel_names]
+
+		self.data = self.data[:, channel_ids, :]
+		self.num_channels = len(channel_ids)
+		self.channel_names = list(filter(
+			lambda x: self.channel_names.index(x) in channel_ids,
+			self.channel_names
+		))
+
 	def extract_time_range(self, low, high):
 		low_samp = low * self.fs
 		high_samp = high * self.fs
@@ -113,9 +129,8 @@ class SignalManager(*plugins):
 
 	@classmethod
 	def register_plugin(cls, plugin):
-		bases = (*cls.__bases__, plugin)
-		bases = set(bases)
-		cls.__bases__ = tuple(bases)
+		cls.__bases__ = tuple(filter(lambda x: str(x) != str(plugin), cls.__bases__))
+		cls.__bases__ = (*cls.__bases__, plugin)
 
 	def __str__(self):
 		return 'Signal Manager'
