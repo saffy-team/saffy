@@ -94,9 +94,8 @@ class SignalManager(*plugins):
 		self.tags = []
 
 	def remove_channels(self, channel_names):
-		channel_ids = [self.channel_names.index(channel_name) for channel_name in channel_names]
-
-		for channel_id in channel_ids:
+		for channel_name in channel_names:
+			channel_id = self.channel_names.index(channel_name)
 			self.data = np.delete(self.data, channel_id, 1)
 			del self.channel_names[channel_id]
 			self.num_channels -= 1
