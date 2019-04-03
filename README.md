@@ -2,6 +2,7 @@
 <img src="https://res.cloudinary.com/ppierzc/image/upload/v1554243272/saffy_logo_hc4atf.png" width="250px" alt="Saffy Logo" />
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
+[![Build Status](https://travis-ci.org/saffy-team/saffy.svg?branch=master)](https://travis-ci.org/saffy-team/saffy)
 
 ## A High-Level Signal Analysis Framework
 
