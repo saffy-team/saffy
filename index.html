@@ -61,6 +61,8 @@
         
             <li><a class="toctree-l3" href="#a-high-level-signal-analysis-framework">A High-Level Signal Analysis Framework</a></li>
         
+            <li><a class="toctree-l3" href="#features">Features</a></li>
+        
             <li><a class="toctree-l3" href="#install">Install</a></li>
         
             <li><a class="toctree-l3" href="#usage">Usage</a></li>
@@ -124,6 +126,9 @@
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
     </li>
   </ul>
   <hr/>
@@ -137,6 +142,15 @@
 <p>A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
 aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
 storage and a pipeline for analysis.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Quick prototyping of signal analysis algorithms</li>
+<li>Reproducibility of solutions</li>
+<li>Clean, readable and organized code</li>
+<li>Your code-base can easily expand over multiple projects</li>
+<li>A clean pipline from modeled signals to real-world data</li>
+<li>Less simple and repetitive work</li>
+</ul>
 <h2 id="install">Install</h2>
 <p><code>pip3 install saffy</code></p>
 <h6 id="from-source">From Source</h6>
@@ -176,7 +190,9 @@ POST_EEG.set_epochs_from_tags(0.5, 2.5)
 POST_EEG.welch_mean_spectrum()
 </code></pre>
 
-<p>With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.</p>
+<p>With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.
+In plain numpy and scipy this would take much longer, would be less readable and probably would be much more error prone.
+For comparison you can see the attached <a href="https://github.com/saffy-team/saffy/blob/master/examples/plain_numpy_scipy_EEG_example.py">solution</a> in plain numpy and scipy.</p>
 <h2 id="contributing">Contributing</h2>
 <p>If you like the project and want to add something to it then please create a pull request.
 - The title should shortly summarize the goal of your addition
@@ -214,6 +230,8 @@ POST_EEG.welch_mean_spectrum()
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
+          <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
       
       
         <span style="margin-left: 15px"><a href="SignalManager/" style="color: #fcfcfc">Next &raquo;</a></span>
@@ -229,5 +247,5 @@ POST_EEG.welch_mean_spectrum()
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-04-03 15:01:49
+Build Date UTC : 2019-04-03 20:25:55
 -->
