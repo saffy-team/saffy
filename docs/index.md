@@ -68,7 +68,7 @@ POST_EEG.welch_mean_spectrum()
 ```
 With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.
 In plain numpy and scipy this would take much longer, would be less readable and probably would be much more error prone.
-For comparison you can see the attached [solution](/examples/plain_numpy_scipy_EEG_example.py) in plain numpy and scipy.
+For comparison you can see the attached [solution](https://github.com/saffy-team/saffy/blob/master/examples/plain_numpy_scipy_EEG_example.py) in plain numpy and scipy.
 
 ## Contributing
 If you like the project and want to add something to it then please create a pull request.
