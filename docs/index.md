@@ -9,6 +9,14 @@ A simple signal analysis framework, which aims at clarity of code and reproducib
 aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
 storage and a pipeline for analysis.
 
+## Features
+- Quick prototyping of signal analysis algorithms
+- Reproducibility of solutions
+- Clean, readable and organized code
+- Your code-base can easily expand over multiple projects
+- A clean pipline from modeled signals to real-world data
+- Less simple and repetitive work
+
 ## Install
 
 `pip3 install saffy`
@@ -36,7 +44,6 @@ sig = saffy.SignalManager(filename="path/to/file")
 
 ## Example
 A short example of how to use saffy for EEG data analysis.
-
 ```python
 EEG = saffy.SignalManager(filename="path/to/file")
 
@@ -60,6 +67,8 @@ POST_EEG.set_epochs_from_tags(0.5, 2.5)
 POST_EEG.welch_mean_spectrum()
 ```
 With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.
+In plain numpy and scipy this would take much longer, would be less readable and probably would be much more error prone.
+For comparison you can see the attached [solution](/examples/plain_numpy_scipy_EEG_example.py) in plain numpy and scipy.
 
 ## Contributing
 If you like the project and want to add something to it then please create a pull request.

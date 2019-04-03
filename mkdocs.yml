@@ -3,6 +3,7 @@ theme:
   name: 'readthedocs'
 extra_css: [extra.css]
 site_favicon: favicon.ico
+repo_url: https://github.com/saffy-team/saffy
 nav:
   - Home: 'index.md'
   - SignalManager: 'SignalManager.md'
