@@ -49,22 +49,12 @@ class TestSignalManager(unittest.TestCase):
         self.assertEqual([], sig.custom_function())
 
     def add_history_test(self):
-        print('add_history_test')
 
         sig = SignalManager(generator=sine_wave())
 
-        sig.remove_channel('sine', )
+        sig.remove_channels(['sine'])
 
-        self.assertEqual(["remove_channel('sine', )"], sig.history)
-
-    def add_history_test(self):
-        print('add_history_test')
-
-        sig = SignalManager(generator=sine_wave())
-
-        sig.remove_channel('sine', )
-
-        self.assertEqual(["remove_channel('sine', )"], sig.history)
+        self.assertEqual(["remove_channels(['sine'], )"], sig.history)
 
     def extract_channel_test(self):
         data = {
@@ -95,6 +85,20 @@ class TestSignalManager(unittest.TestCase):
         sig.extract_time_range(0, 1)
 
         self.assertEqual(sig.data.shape, (1, 1, 512))
+
+    @staticmethod
+    def chaining_test():
+        data = {
+            'fs': 512,
+            'num_channels': 1,
+            'channel_names': ['sine1'],
+            'epochs': 1
+        }
+
+        sig = SignalManager(generator=sine_wave(data=data))
+
+        sig.extract_time_range(0, 2)\
+            .extract_time_range(0, 1)
 
 
 if __name__ == '__main__':

@@ -76,6 +76,8 @@ class SignalManager(*plugins):
 			np.concatenate(([0], np.where(np.diff(self.tags) > 1)[0] + 1))
 		]
 
+		return self
+
 	def set_epochs_from_tags(self, low, high):
 		self.t = np.arange(low, high, 1 / self.fs)
 
@@ -93,12 +95,16 @@ class SignalManager(*plugins):
 		self.data = data
 		self.tags = []
 
+		return self
+
 	def remove_channels(self, channel_names):
 		for channel_name in channel_names:
 			channel_id = self.channel_names.index(channel_name)
 			self.data = np.delete(self.data, channel_id, 1)
 			del self.channel_names[channel_id]
 			self.num_channels -= 1
+
+		return self
 
 	def extract_channels(self, channel_names):
 		channel_ids = [self.channel_names.index(channel_name) for channel_name in channel_names]
@@ -110,6 +116,8 @@ class SignalManager(*plugins):
 			self.channel_names
 		))
 
+		return self
+
 	def extract_time_range(self, low, high):
 		low_samp = low * self.fs
 		high_samp = high * self.fs
@@ -117,6 +125,8 @@ class SignalManager(*plugins):
 		self.t = np.arange(low, high, 1 / self.fs)
 
 		self.data = self.data[:, :, low_samp: high_samp]
+
+		return self
 
 	def copy(self, name=''):
 		return SignalManager(name=name, generator={

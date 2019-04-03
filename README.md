@@ -18,9 +18,13 @@ storage and a pipeline for analysis.
 ###### From Source
 Using a virtualenv is recommended! 
 
+`!pip3 install -U https://api.github.com/repos/saffy-team/saffy/zipball/master`
+
+or if you want the source code
+
 Download the package to your project directory
 
-`git clone https://github.com/PPierzc/saffy.git`
+`git clone https://github.com/saffy-team/saffy.git`
 
 Install dependencies
 
@@ -133,23 +137,22 @@ EEG.set_tags_from_channel('trig')
 
 EEG.remove_channel('trig')
 
-EEG.butter_highpass_filter_v2(1, 2)
-EEG.cheb2_notch_filter_v2(50, order=1, rs=3, width=0.3, btype='bandstop')
+EEG.butter_highpass_filter(cutoff=1, order=2)
+EEG.cheb2_notch_filter(cutoff=50, order=1, rs=3, width=0.3, btype='bandstop')
 
 PRE_EEG = EEG.copy('pre')
 PRE_EEG.set_epochs_from_tags(-4, -2)
 
-PRE_EEG.welch_spectrum()
-PRE_EEG.spectrum = np.mean(PRE_EEG.spectrum, axis=0)
-PRE_EEG.spectrum = np.reshape(PRE_EEG.spectrum, (1, *PRE_EEG.spectrum.shape))
+PRE_EEG.welch_mean_spectrum()
 
 POST_EEG = EEG.copy('post')
 POST_EEG.set_epochs_from_tags(0.5, 2.5)
 
-POST_EEG.welch_spectrum()
-POST_EEG.spectrum = np.mean(POST_EEG.spectrum, axis=0)
-POST_EEG.spectrum = np.reshape(POST_EEG.spectrum, (1, *POST_EEG.spectrum.shape))
+POST_EEG.welch_mean_spectrum()
+```
+With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.
 
+```python
 fig, ax = plt.subplots(
     nrows=max([PRE_EEG.num_channels, POST_EEG.num_channels]),
     ncols=1,

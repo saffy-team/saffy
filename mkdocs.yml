@@ -3,3 +3,10 @@ theme:
   name: 'readthedocs'
 extra_css: [extra.css]
 site_favicon: favicon.ico
+nav:
+  - Home: 'index.md'
+  - SignalManager: 'SignalManager.md'
+  - Plugins:
+      - Hilbert: 'Plugins/Hilbert.md'
+      - Welch: 'Plugins/Welch.md'
+      - Create Custom Plugin: 'Plugins/Create Custom Plugin.md'
