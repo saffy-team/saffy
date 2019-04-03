@@ -5,11 +5,19 @@
 
 ## A High-Level Signal Analysis Framework
 
-A simple signal analysis framework, which aims at clarity of code and reproducibility of solutions. The plugin architecture
-aims to encourage building modular code among scientists and data analysts. It provides a basic structure for signal
-storage and a pipeline for analysis.
+Ever too often in signal analysis is time wasted on the repetitive tasks, which are very similar across projects. You promise yourself
+to build a code base for your solutions, but end up just copy pasting whole chunks of code. Starting each project you hope that this time you will
+have good structure and it will be awesome to work with. But it most often fails.
+Probably because your on a deadline or building sustainable data architectures is not your thing, you just wanted to do some analysis.
+
+Rightfully so! That's why saffy was created, so that you don't have to come up with a data structure and architecture.
+So that you can concentrate on the fun and important part which is the analysis! When you come up with a solution you like,
+you already have it as part of the framework, so it is easy to use in the future.
 
 ## Features
+- Write 50% less code than before
+- You concentrate on the fun logic stuff and let saffy do the boring repetetive tasks.
+- Lost in variables and data? Saffy provides a data architecture to keep it clean. 
 - Quick prototyping of signal analysis algorithms
 - Reproducibility of solutions
 - Clean, readable and organized code
