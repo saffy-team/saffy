@@ -23,7 +23,7 @@ you already have it as part of the framework, so it is easy to use in the future
 - Clean, readable and organized code
 - Your code-base can easily expand over multiple projects
 - A clean pipline from modeled signals to real-world data
-- Less simple and repetitive work
+- Less of that brain-less and repetitive work
 
 ## Install
 
