@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../favicon.ico">
+  
+  <title>SignalManager - Saffy</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SignalManager";
+    var mkdocs_page_input_path = "SignalManager.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Saffy</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">SignalManager</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#signalmanager">SignalManager</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#generator">Generator</a></li>
+        
+            <li><a class="toctree-l3" href="#filename">Filename</a></li>
+        
+            <li><a class="toctree-l3" href="#set_tags_from_channelself-channel_name">set_tags_from_channel(self, channel_name)</a></li>
+        
+            <li><a class="toctree-l3" href="#set_epochs_from_tagsself-low-high">set_epochs_from_tags(self, low, high)</a></li>
+        
+            <li><a class="toctree-l3" href="#remove_channelsself-channel_names">remove_channels(self, channel_names)</a></li>
+        
+            <li><a class="toctree-l3" href="#extract_channelsself-channel_names">extract_channels(self, channel_names)</a></li>
+        
+            <li><a class="toctree-l3" href="#extract_time_rangeself-low-high">extract_time_range(self, low, high)</a></li>
+        
+            <li><a class="toctree-l3" href="#copyself-name">copy(self, name="")</a></li>
+        
+            <li><a class="toctree-l3" href="#callself-func">call(self, func)</a></li>
+        
+            <li><a class="toctree-l3" href="#register_plugincls-plugin">register_plugin(cls, plugin)</a></li>
+        
+            <li><a class="toctree-l3" href="#history">History</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Plugins</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Plugins/Hilbert/">Hilbert</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Plugins/Welch/">Welch</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Plugins/Create Custom Plugin/">Create Custom Plugin</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Saffy</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>SignalManager</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="signalmanager">SignalManager</h2>
+<p>The SignalManager comes with some basic parameters.</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs</td>
+<td>sampling frequency</td>
+</tr>
+<tr>
+<td>num_channels</td>
+<td>number of channels</td>
+</tr>
+<tr>
+<td>channel_names</td>
+<td>name for each channel</td>
+</tr>
+<tr>
+<td>data</td>
+<td>the signal in the structure of (epoch x channel x signal)</td>
+</tr>
+<tr>
+<td>t</td>
+<td>time vector</td>
+</tr>
+<tr>
+<td>epochs</td>
+<td>number of epochs</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>position of tags in signal</td>
+</tr>
+<tr>
+<td>spectrum</td>
+<td>matrix of spectrum</td>
+</tr>
+<tr>
+<td>spectrum_freqs</td>
+<td>vector of frequencies</td>
+</tr>
+<tr>
+<td>phase</td>
+<td>matrix of phase</td>
+</tr>
+<tr>
+<td>history</td>
+<td>a list of all the steps taken</td>
+</tr>
+</tbody>
+</table>
+<p>When initializing the object there are two options.</p>
+<h6 id="generator">Generator</h6>
+<p>A dictionary of the structure</p>
+<pre><code>data = {
+      'fs': # float,
+      'num_channels': # integer,
+      'channel_names': # list of strings,
+      'epochs': # integer,
+      't': # time array,
+      'tags': # list,
+      'data': # Signal Matrix
+  }
+</code></pre>
+
+<pre><code class="python">saffy.SignalManager(generator=data)
+</code></pre>
+
+<h6 id="filename">Filename</h6>
+<p>The name of the file generated by Svarog. 3 files eg. <code>data.raw</code>, <code>data.xml</code>, <code>data.tag</code></p>
+<pre><code class="python">saffy.SignalManager(filename='data')
+</code></pre>
+
+<hr />
+<h3 id="set_tags_from_channelself-channel_name">set_tags_from_channel(self, channel_name)</h3>
+<p>Uses a channel as the tag indicator. Normalizes the value to 1 through divided by the maximum value. Sets threshold at 0.9.
+Sets tag at beginnings of resultant clusters.</p>
+<h3 id="set_epochs_from_tagsself-low-high">set_epochs_from_tags(self, low, high)</h3>
+<p>Uses the tag list to cut the data into epochs. The <code>low</code> and <code>high</code> tell us where to cut
+based on the tags. They are in seconds. For example if you want to cut between 2 seconds before and 3 after the tag you would write
+<code>sig.set_epochs_from_tags(-2, 3)</code>.</p>
+<h3 id="remove_channelsself-channel_names">remove_channels(self, channel_names)</h3>
+<p>Removes the specified channels from the data.</p>
+<h5 id="params">Params</h5>
+<ul>
+<li>channel_names: list of strings</li>
+</ul>
+<h3 id="extract_channelsself-channel_names">extract_channels(self, channel_names)</h3>
+<p>Removes all channels except for those provided in the `channel_names' parameter.</p>
+<h5 id="params_1">Params</h5>
+<ul>
+<li>channel_names: list of strings</li>
+</ul>
+<h3 id="extract_time_rangeself-low-high">extract_time_range(self, low, high)</h3>
+<p>Cuts data to the provided <code>low</code> and <code>high</code> arguments.</p>
+<h5 id="params_2">Params</h5>
+<ul>
+<li>low: starting point of new signal in seconds.</li>
+<li>high: end point of new signal in seconds.</li>
+</ul>
+<h3 id="copyself-name">copy(self, name="")</h3>
+<p>Creates a independent copy of the SignalManager object.</p>
+<h5 id="params_3">Params</h5>
+<ul>
+<li>name: a documenting value to keep track why we are coping the signal. </li>
+</ul>
+<h3 id="callself-func">call(self, func)</h3>
+<p>Used to run single custom functions on the data. Allows consistency when building analysis piplines.</p>
+<h5 id="params_4">Params</h5>
+<ul>
+<li>func: a function that takes only self as the parameter.</li>
+</ul>
+<h5 id="example">Example</h5>
+<p>You should do this:</p>
+<pre><code class="python">def custom_function(self):
+    print(self.data)
+
+sig.call(custom_function)
+</code></pre>
+
+<p>instead of this:</p>
+<pre><code class="python">def custom_function(sig):
+    print(sig.data)
+
+custom_function(sig)
+</code></pre>
+
+<h3 id="register_plugincls-plugin">register_plugin(cls, plugin)</h3>
+<p>Use this to add a custom plugin to be used with the SignalManager</p>
+<h5 id="params_5">Params</h5>
+<ul>
+<li>plugin: An instance of the <a href="">PluginManager</a> class.</li>
+</ul>
+<h5 id="example_1">Example</h5>
+<p>Create a custom plugin.</p>
+<pre><code class="python">class CustomPlugin(saffy.PluginManager):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.custom = {
+            'param': 'some value'
+        }
+
+    def custom_function(self):
+        # do something
+        pass
+</code></pre>
+
+<p>Then you can regiser it and use the <code>custom_function</code>.</p>
+<pre><code class="python">saffy.SignalManager.register_plugin(CustomPlugin)
+</code></pre>
+
+<h3 id="history">History</h3>
+<p>All the operations on the signal are stored in the history parameter. It allows to keep track of the changes that have been
+made to the signal.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Plugins/Hilbert/" class="btn btn-neutral float-right" title="Hilbert">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Plugins/Hilbert/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
