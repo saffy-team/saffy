@@ -85,14 +85,16 @@ class SignalManager(*plugins):
 		length = high - low
 		data = np.zeros((len(self.tags), self.num_channels, length))
 
+		self.epochs = len(self.tags)
+
 		for idx, tag in enumerate(self.tags):
 			data[idx] = self.data[:, :, tag + low: tag + high]
 
 		self.data = data
 		self.tags = []
 
-	def remove_channel(self, channel_name):
-		channel_id = self.channel_names.index(channel_name)
+	def remove_channels(self, channel_names):
+		channel_id = [self.channel_names.index(channel_name) for channel_name in channel_names]
 
 		self.data = np.delete(self.data, channel_id, 1)
 		del self.channel_names[channel_id]
@@ -126,6 +128,10 @@ class SignalManager(*plugins):
 			't': self.t,
 			'tags': self.tags
 		})
+
+	def call(self, func):
+		func(self)
+		return self
 
 	@classmethod
 	def register_plugin(cls, plugin):
