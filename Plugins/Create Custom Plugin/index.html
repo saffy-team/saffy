@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Welch - Saffy</title>
+  <title>Create Custom Plugin - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Welch";
-    var mkdocs_page_input_path = "Plugins/Welch.md";
+    var mkdocs_page_name = "Create Custom Plugin";
+    var mkdocs_page_input_path = "Plugins/Create Custom Plugin.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -59,31 +59,31 @@
 		
     <span class="caption-text">Plugins</span>
     <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../Create Custom Plugin/">Create Custom Plugin</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../Hilbert/">Hilbert</a>
-                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Welch</a>
+    <a class="current" href="./">Create Custom Plugin</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#welch">Welch</a></li>
+    <li class="toctree-l3"><a href="#create-custom-plugin">Create Custom Plugin</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#welch_spectrumself">welch_spectrum(self)</a></li>
+            <li><a class="toctree-l4" href="#class-implementation">Class Implementation</a></li>
         
-            <li><a class="toctree-l4" href="#welch_mean_spectrumself">welch_mean_spectrum(self)</a></li>
+            <li><a class="toctree-l4" href="#functional-plugin">Functional Plugin</a></li>
         
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Hilbert/">Hilbert</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Welch/">Welch</a>
                 </li>
     </ul>
 	    </li>
@@ -114,7 +114,7 @@
         
       
     
-    <li>Welch</li>
+    <li>Create Custom Plugin</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -124,14 +124,43 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="welch">Welch</h2>
-<p>Is one of the methods for calculating the spectral density.</p>
-<h3 id="welch_spectrumself">welch_spectrum(self)</h3>
-<p>Calculates the Welch spectrum.
-Adds the values to <code>self.spectrum</code> and <code>self.spectrum_freqs</code>.</p>
-<h3 id="welch_mean_spectrumself">welch_mean_spectrum(self)</h3>
-<p>Calculates the Welch spectrum and then takes the mean value across epochs.
-Adds the values to <code>self.spectrum</code> and <code>self.spectrum_freqs</code></p>
+                <h2 id="create-custom-plugin">Create Custom Plugin</h2>
+<p>There will most definitely be a case, where you will want to create a custom plugin.</p>
+<p>The proposed convention for plugin development is the following.
+All data that is to be stored extra, should be stored in the form of a dictionary assigned to a variable of the same name
+as the plugin.</p>
+<p>Plugin functions should be preceded by the plugin name. </p>
+<h3 id="class-implementation">Class Implementation</h3>
+<pre><code class="python">import saffy
+
+class CustomPlugin(saffy.PluginManager):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.custom = {
+            'param': 'some value'
+        }
+
+    def custom_function(self):
+        # do something
+        pass
+
+saffy.SignalManager.register_plugin(CustomPlugin)
+
+sig = saffy.SignalManager(generator=signal_data)
+
+sig.custom_function()
+</code></pre>
+
+<h3 id="functional-plugin">Functional Plugin</h3>
+<p>In other cases when it is only one function you want to use you can use the <code>call</code> function</p>
+<pre><code class="python">sig = saffy.SignalManager(generator=signal_data)
+
+def custom_function(self):
+    print(self.data)
+
+sig.call(custom_function)
+</code></pre>
               
             </div>
           </div>
@@ -139,8 +168,10 @@ Adds the values to <code>self.spectrum</code> and <code>self.spectrum_freqs</cod
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../Hilbert/" class="btn btn-neutral float-right" title="Hilbert">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../Hilbert/" class="btn btn-neutral" title="Hilbert"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../.." class="btn btn-neutral" title="Saffy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -166,8 +197,10 @@ Adds the values to <code>self.spectrum</code> and <code>self.spectrum_freqs</cod
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Hilbert/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../Hilbert/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
