@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Create Custom Plugin - Saffy</title>
+  <title>Filters - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Create Custom Plugin";
-    var mkdocs_page_input_path = "Plugins/Create Custom Plugin.md";
+    var mkdocs_page_name = "Filters";
+    var mkdocs_page_input_path = "Plugins/Filters.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -57,6 +57,17 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Tutorials/Basics/">Basics</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../../SignalManager/">SignalManager</a>
 	    </li>
           
@@ -64,6 +75,14 @@
 		
     <span class="caption-text">Plugins</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../PluginManager/">PluginManager</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Fourier/">Fourier</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../Hilbert/">Hilbert</a>
@@ -74,21 +93,33 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Create Custom Plugin</a>
+    <a class="current" href="./">Filters</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#create-custom-plugin">Create Custom Plugin</a></li>
+    <li class="toctree-l3"><a href="#filters">Filters</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#class-implementation">Class Implementation</a></li>
+            <li><a class="toctree-l4" href="#cheb2_notch_filterself-cutoff-order5-rs3-width1-methodnone-btypebandstop">cheb2_notch_filter(self, cutoff, order=5, rs=3, width=.1, method=None, btype='bandstop')</a></li>
         
-            <li><a class="toctree-l4" href="#functional-plugin">Functional Plugin</a></li>
+            <li><a class="toctree-l4" href="#butter_highpass_filterself-cutoff-order5-methodnone">butter_highpass_filter(self, cutoff, order=5, method=None)</a></li>
+        
+            <li><a class="toctree-l4" href="#butter_lowpass_filterself-cutoff-order5-methodnone">butter_lowpass_filter(self, cutoff, order=5, method=None)</a></li>
+        
+            <li><a class="toctree-l4" href="#butter_bandpass_filterself-lowcut-highcut-order5-methodnone">butter_bandpass_filter(self, lowcut, highcut, order=5, method=None)</a></li>
         
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Graphics/">Graphics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Create Custom Plugins/">Create Custom Plugins</a>
                 </li>
     </ul>
 	    </li>
@@ -119,10 +150,10 @@
         
       
     
-    <li>Create Custom Plugin</li>
+    <li>Filters</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Create Custom Plugin.md"
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Filters.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -132,49 +163,52 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="create-custom-plugin">Create Custom Plugin</h2>
-<p>There will most definitely be a case, where you will want to create a custom plugin.</p>
-<p>The proposed convention for plugin development is the following.
-All data that is to be stored extra, should be stored in the form of a dictionary assigned to a variable of the same name
-as the plugin.</p>
-<p>Plugin functions should be preceded by the plugin name. </p>
-<h3 id="class-implementation">Class Implementation</h3>
-<pre><code class="python">import saffy
-
-class CustomPlugin(saffy.PluginManager):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.custom = {
-            'param': 'some value'
-        }
-
-    def custom_function(self):
-        # do something
-        pass
-
-saffy.SignalManager.register_plugin(CustomPlugin)
-
-sig = saffy.SignalManager(generator=signal_data)
-
-sig.custom_function()
-</code></pre>
-
-<h3 id="functional-plugin">Functional Plugin</h3>
-<p>In other cases when it is only one function you want to use you can use the <code>call</code> function</p>
-<pre><code class="python">sig = saffy.SignalManager(generator=signal_data)
-
-def custom_function(self):
-    print(self.data)
-
-sig.call(custom_function)
-</code></pre>
+                <h2 id="filters">Filters</h2>
+<p>A set of filter designs to simplify the process of filtering data.</p>
+<h3 id="cheb2_notch_filterself-cutoff-order5-rs3-width1-methodnone-btypebandstop">cheb2_notch_filter(self, cutoff, order=5, rs=3, width=.1, method=None, btype='bandstop')</h3>
+<p>A notch filter using the cheby2 filter from scipy.</p>
+<h5 id="params">Params</h5>
+<ul>
+<li><strong>cutoff</strong>: The frequency at which the filter is to act.</li>
+<li><strong>order</strong>: The order of the filter</li>
+<li><strong>rs</strong>: Minimum attenuation required in stop band. Specified in decibels.</li>
+<li><strong>width</strong>: How precise is the filter supposed to be. In Hz.</li>
+<li><strong>method</strong>: Method of filtering. By default <code>scipy.signal.filtfilt</code> is used</li>
+<li><strong>btype</strong>: Type of filter <code>bandstop</code> or <code>bandpass</code></li>
+</ul>
+<h3 id="butter_highpass_filterself-cutoff-order5-methodnone">butter_highpass_filter(self, cutoff, order=5, method=None)</h3>
+<p>A highpass filter filter using the butterworth filter from scipy.</p>
+<h5 id="params_1">Params</h5>
+<ul>
+<li><strong>cutoff</strong>: The frequency at which the filter is to act.</li>
+<li><strong>order</strong>: The order of the filter</li>
+<li><strong>method</strong>: Method of filtering. By default <code>scipy.signal.filtfilt</code> is used</li>
+</ul>
+<h3 id="butter_lowpass_filterself-cutoff-order5-methodnone">butter_lowpass_filter(self, cutoff, order=5, method=None)</h3>
+<p>A lowpass filter filter using the butterworth filter from scipy.</p>
+<h5 id="params_2">Params</h5>
+<ul>
+<li><strong>cutoff</strong>: The frequency at which the filter is to act.</li>
+<li><strong>order</strong>: The order of the filter</li>
+<li><strong>method</strong>: Method of filtering. By default <code>scipy.signal.filtfilt</code> is used</li>
+</ul>
+<h3 id="butter_bandpass_filterself-lowcut-highcut-order5-methodnone">butter_bandpass_filter(self, lowcut, highcut, order=5, method=None)</h3>
+<p>A bandpass filter filter using the butterworth filter from scipy.</p>
+<h5 id="params_3">Params</h5>
+<ul>
+<li><strong>lowcut</strong>: The lower frequency at which the filter is to act.</li>
+<li><strong>highcut</strong>: The higher frequency at which the filter is to act.</li>
+<li><strong>order</strong>: The order of the filter</li>
+<li><strong>method</strong>: Method of filtering. By default <code>scipy.signal.filtfilt</code> is used</li>
+</ul>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Graphics/" class="btn btn-neutral float-right" title="Graphics">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Welch/" class="btn btn-neutral" title="Welch"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -207,6 +241,8 @@ sig.call(custom_function)
       
         <span><a href="../Welch/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../Graphics/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

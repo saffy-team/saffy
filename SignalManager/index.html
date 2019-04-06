@@ -55,6 +55,17 @@
     <a class="" href="..">Home</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Tutorials/Basics/">Basics</a>
+                </li>
+    </ul>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
     <a class="current" href="./">SignalManager</a>
@@ -86,6 +97,8 @@
         
             <li><a class="toctree-l3" href="#history">History</a></li>
         
+            <li><a class="toctree-l3" href="#chaining">Chaining</a></li>
+        
         </ul>
     
 
@@ -98,6 +111,14 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../Plugins/PluginManager/">PluginManager</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Plugins/Fourier/">Fourier</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../Plugins/Hilbert/">Hilbert</a>
                 </li>
                 <li class="">
@@ -106,7 +127,15 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../Plugins/Create Custom Plugin/">Create Custom Plugin</a>
+    <a class="" href="../Plugins/Filters/">Filters</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Plugins/Graphics/">Graphics</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Plugins/Create Custom Plugins/">Create Custom Plugins</a>
                 </li>
     </ul>
 	    </li>
@@ -228,40 +257,49 @@
 <h3 id="set_tags_from_channelself-channel_name">set_tags_from_channel(self, channel_name)</h3>
 <p>Uses a channel as the tag indicator. Normalizes the value to 1 through divided by the maximum value. Sets threshold at 0.9.
 Sets tag at beginnings of resultant clusters.</p>
+<h5 id="params">Params</h5>
+<ul>
+<li><strong>channel_name</strong>: the string name of the channel to set tags from.</li>
+</ul>
 <h3 id="set_epochs_from_tagsself-low-high">set_epochs_from_tags(self, low, high)</h3>
 <p>Uses the tag list to cut the data into epochs. The <code>low</code> and <code>high</code> tell us where to cut
 based on the tags. They are in seconds. For example if you want to cut between 2 seconds before and 3 after the tag you would write
 <code>sig.set_epochs_from_tags(-2, 3)</code>.</p>
-<h3 id="remove_channelsself-channel_names">remove_channels(self, channel_names)</h3>
-<p>Removes the specified channels from the data.</p>
-<h5 id="params">Params</h5>
-<ul>
-<li>channel_names: list of strings</li>
-</ul>
-<h3 id="extract_channelsself-channel_names">extract_channels(self, channel_names)</h3>
-<p>Removes all channels except for those provided in the `channel_names' parameter.</p>
 <h5 id="params_1">Params</h5>
 <ul>
-<li>channel_names: list of strings</li>
+<li><strong>low</strong>: In seconds. Starting time of the epoch relative to the tag. The tag is 0 seconds.</li>
+<li><strong>high</strong>: In seconds. Ending time of the epoch relative to the tag. The tag is 0 seconds.</li>
+</ul>
+<h3 id="remove_channelsself-channel_names">remove_channels(self, channel_names)</h3>
+<p>Removes the specified channels from the data.</p>
+<h5 id="params_2">Params</h5>
+<ul>
+<li><strong>channel_names</strong>: list of strings</li>
+</ul>
+<h3 id="extract_channelsself-channel_names">extract_channels(self, channel_names)</h3>
+<p>Removes all channels except for those provided in the <code>channel_names</code> parameter.</p>
+<h5 id="params_3">Params</h5>
+<ul>
+<li><strong>channel_names</strong>: list of strings</li>
 </ul>
 <h3 id="extract_time_rangeself-low-high">extract_time_range(self, low, high)</h3>
 <p>Cuts data to the provided <code>low</code> and <code>high</code> arguments.</p>
-<h5 id="params_2">Params</h5>
+<h5 id="params_4">Params</h5>
 <ul>
-<li>low: starting point of new signal in seconds.</li>
-<li>high: end point of new signal in seconds.</li>
+<li><strong>low</strong>: starting point of new signal in seconds.</li>
+<li><strong>high</strong>: end point of new signal in seconds.</li>
 </ul>
 <h3 id="copyself-name">copy(self, name="")</h3>
 <p>Creates a independent copy of the SignalManager object.</p>
-<h5 id="params_3">Params</h5>
+<h5 id="params_5">Params</h5>
 <ul>
-<li>name: a documenting value to keep track why we are coping the signal. </li>
+<li><strong>name</strong>: a documenting value to keep track why we are coping the signal. </li>
 </ul>
 <h3 id="callself-func">call(self, func)</h3>
 <p>Used to run single custom functions on the data. Allows consistency when building analysis piplines.</p>
-<h5 id="params_4">Params</h5>
+<h5 id="params_6">Params</h5>
 <ul>
-<li>func: a function that takes only self as the parameter.</li>
+<li><strong>func</strong>: a function that takes only self as the parameter.</li>
 </ul>
 <h5 id="example">Example</h5>
 <p>You should do this:</p>
@@ -280,9 +318,9 @@ custom_function(sig)
 
 <h3 id="register_plugincls-plugin">register_plugin(cls, plugin)</h3>
 <p>Use this to add a custom plugin to be used with the SignalManager</p>
-<h5 id="params_5">Params</h5>
+<h5 id="params_7">Params</h5>
 <ul>
-<li>plugin: An instance of the <a href="">PluginManager</a> class.</li>
+<li><strong>plugin</strong>: An instance of the <a href="/Plugins/PluginManager">PluginManager</a> class.</li>
 </ul>
 <h5 id="example_1">Example</h5>
 <p>Create a custom plugin.</p>
@@ -306,6 +344,13 @@ custom_function(sig)
 <h3 id="history">History</h3>
 <p>All the operations on the signal are stored in the history parameter. It allows to keep track of the changes that have been
 made to the signal.</p>
+<h3 id="chaining">Chaining</h3>
+<p>Each method returns self, so chaining of functions is possible. For example setting tags could be done this way.</p>
+<pre><code class="python">sig = SignalManager(filename='path/to/file')\
+    .extract_channels(['C3', 'C4', 'trig'])\
+    .set_tags_from_channel('trig')\
+    .remove_channel('trig')
+</code></pre>
               
             </div>
           </div>
@@ -313,10 +358,10 @@ made to the signal.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Plugins/Hilbert/" class="btn btn-neutral float-right" title="Hilbert">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Plugins/PluginManager/" class="btn btn-neutral float-right" title="PluginManager">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Tutorials/Basics/" class="btn btn-neutral" title="Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -344,10 +389,10 @@ made to the signal.</p>
           <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Tutorials/Basics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Plugins/Hilbert/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Plugins/PluginManager/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Hilbert - Saffy</title>
+  <title>Fourier - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Hilbert";
-    var mkdocs_page_input_path = "Plugins/Hilbert.md";
+    var mkdocs_page_name = "Fourier";
+    var mkdocs_page_input_path = "Plugins/Fourier.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -79,31 +79,25 @@
                     
     <a class="" href="../PluginManager/">PluginManager</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../Fourier/">Fourier</a>
-                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Hilbert</a>
+    <a class="current" href="./">Fourier</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#hilbert">Hilbert</a></li>
+    <li class="toctree-l3"><a href="#fourier">Fourier</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#hilbert-dict">hilbert: dict</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_mean_powerself">hilbert_mean_power(self)</a></li>
+            <li><a class="toctree-l4" href="#fourier_transformself">fourier_transform(self)</a></li>
         
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Hilbert/">Hilbert</a>
                 </li>
                 <li class="">
                     
@@ -150,10 +144,10 @@
         
       
     
-    <li>Hilbert</li>
+    <li>Fourier</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Hilbert.md"
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Fourier.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -163,53 +157,11 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="hilbert">Hilbert</h2>
-<p>The plugin for calculating Hilbert Transform</p>
-<h3 id="hilbert-dict">hilbert: dict</h3>
-<p>The data structure which stores all the calculated values, like the power, amplitude, phase.</p>
-<table>
-<thead>
-<tr>
-<th>field</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>hilbert transform</td>
-</tr>
-<tr>
-<td>amplitude</td>
-<td>the instantaneous amplitude</td>
-</tr>
-<tr>
-<td>power</td>
-<td>the instantaneous power</td>
-</tr>
-<tr>
-<td>phase</td>
-<td>the instantaneous phase</td>
-</tr>
-</tbody>
-</table>
-<h3 id="hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</h3>
-<p>Calculates the Hilbert Transform. The <code>phase_freq</code> is used to determine for which frequency is the instantaneous phase 
-to be calculated. It populates all the values of the <code>hilbert</code> dictionary.</p>
-<h5 id="params">Params</h5>
-<ul>
-<li><strong>phase_freq</strong>: when calculating the instantaneous phase, we need to know for which frequency to calculate it. </li>
-</ul>
-<h3 id="hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</h3>
-<p>Calculates the mean power from the power between <code>low</code> and <code>high</code>, then subtracts the mean value from the entire power vector.
-Calculates for each channel separately.</p>
-<h5 id="params_1">Params</h5>
-<ul>
-<li><strong>low</strong>: the start time (in seconds) from where to calculate the mean.</li>
-<li><strong>high</strong>: the end time (in seconds) from where to calculate the mean.</li>
-</ul>
-<h3 id="hilbert_mean_powerself">hilbert_mean_power(self)</h3>
-<p>Calculates the mean power across epochs.</p>
+                <h2 id="fourier">Fourier</h2>
+<p>The classical method for calculating the spectral density.</p>
+<h3 id="fourier_transformself">fourier_transform(self)</h3>
+<p>Calculates the real fast fourier transform.
+Sets the values of <code>self.spectrum</code> and <code>self.spectrum_freqs</code>, <code>self.phase</code>.</p>
               
             </div>
           </div>
@@ -217,10 +169,10 @@ Calculates for each channel separately.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Welch/" class="btn btn-neutral float-right" title="Welch">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Hilbert/" class="btn btn-neutral float-right" title="Hilbert">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Fourier/" class="btn btn-neutral" title="Fourier"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../PluginManager/" class="btn btn-neutral" title="PluginManager"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -248,10 +200,10 @@ Calculates for each channel separately.</p>
           <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Fourier/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../PluginManager/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Welch/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Hilbert/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

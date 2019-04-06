@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Hilbert - Saffy</title>
+  <title>Create Custom Plugins - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Hilbert";
-    var mkdocs_page_input_path = "Plugins/Hilbert.md";
+    var mkdocs_page_name = "Create Custom Plugins";
+    var mkdocs_page_input_path = "Plugins/Create Custom Plugins.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -83,27 +83,9 @@
                     
     <a class="" href="../Fourier/">Fourier</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Hilbert</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#hilbert">Hilbert</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#hilbert-dict">hilbert: dict</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_mean_powerself">hilbert_mean_power(self)</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../Hilbert/">Hilbert</a>
                 </li>
                 <li class="">
                     
@@ -117,9 +99,23 @@
                     
     <a class="" href="../Graphics/">Graphics</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../Create Custom Plugins/">Create Custom Plugins</a>
+    <a class="current" href="./">Create Custom Plugins</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#create-custom-plugin">Create Custom Plugin</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#class-implementation">Class Implementation</a></li>
+        
+            <li><a class="toctree-l4" href="#functional-plugin">Functional Plugin</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -150,10 +146,10 @@
         
       
     
-    <li>Hilbert</li>
+    <li>Create Custom Plugins</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Hilbert.md"
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Create Custom Plugins.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -163,53 +159,43 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="hilbert">Hilbert</h2>
-<p>The plugin for calculating Hilbert Transform</p>
-<h3 id="hilbert-dict">hilbert: dict</h3>
-<p>The data structure which stores all the calculated values, like the power, amplitude, phase.</p>
-<table>
-<thead>
-<tr>
-<th>field</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>hilbert transform</td>
-</tr>
-<tr>
-<td>amplitude</td>
-<td>the instantaneous amplitude</td>
-</tr>
-<tr>
-<td>power</td>
-<td>the instantaneous power</td>
-</tr>
-<tr>
-<td>phase</td>
-<td>the instantaneous phase</td>
-</tr>
-</tbody>
-</table>
-<h3 id="hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</h3>
-<p>Calculates the Hilbert Transform. The <code>phase_freq</code> is used to determine for which frequency is the instantaneous phase 
-to be calculated. It populates all the values of the <code>hilbert</code> dictionary.</p>
-<h5 id="params">Params</h5>
-<ul>
-<li><strong>phase_freq</strong>: when calculating the instantaneous phase, we need to know for which frequency to calculate it. </li>
-</ul>
-<h3 id="hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</h3>
-<p>Calculates the mean power from the power between <code>low</code> and <code>high</code>, then subtracts the mean value from the entire power vector.
-Calculates for each channel separately.</p>
-<h5 id="params_1">Params</h5>
-<ul>
-<li><strong>low</strong>: the start time (in seconds) from where to calculate the mean.</li>
-<li><strong>high</strong>: the end time (in seconds) from where to calculate the mean.</li>
-</ul>
-<h3 id="hilbert_mean_powerself">hilbert_mean_power(self)</h3>
-<p>Calculates the mean power across epochs.</p>
+                <h2 id="create-custom-plugin">Create Custom Plugin</h2>
+<p>There will most definitely be a case, where you will want to create a custom plugin.</p>
+<p>The proposed convention for plugin development is the following.
+All data that is to be stored extra, should be stored in the form of a dictionary assigned to a variable of the same name
+as the plugin.</p>
+<p>Plugin functions should be preceded by the plugin name. </p>
+<h3 id="class-implementation">Class Implementation</h3>
+<pre><code class="python">import saffy
+
+class CustomPlugin(saffy.PluginManager):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.custom = {
+            'param': 'some value'
+        }
+
+    def custom_function(self):
+        # do something
+        pass
+
+saffy.SignalManager.register_plugin(CustomPlugin)
+
+sig = saffy.SignalManager(generator=signal_data)
+
+sig.custom_function()
+</code></pre>
+
+<h3 id="functional-plugin">Functional Plugin</h3>
+<p>In other cases when it is only one function you want to use you can use the <code>call</code> function</p>
+<pre><code class="python">sig = saffy.SignalManager(generator=signal_data)
+
+def custom_function(self):
+    print(self.data)
+
+sig.call(custom_function)
+</code></pre>
               
             </div>
           </div>
@@ -217,10 +203,8 @@ Calculates for each channel separately.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Welch/" class="btn btn-neutral float-right" title="Welch">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../Fourier/" class="btn btn-neutral" title="Fourier"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Graphics/" class="btn btn-neutral" title="Graphics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -248,10 +232,8 @@ Calculates for each channel separately.</p>
           <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Fourier/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Graphics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../Welch/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Hilbert - Saffy</title>
+  <title>Graphics - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Hilbert";
-    var mkdocs_page_input_path = "Plugins/Hilbert.md";
+    var mkdocs_page_name = "Graphics";
+    var mkdocs_page_input_path = "Plugins/Graphics.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -83,27 +83,9 @@
                     
     <a class="" href="../Fourier/">Fourier</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Hilbert</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#hilbert">Hilbert</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#hilbert-dict">hilbert: dict</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</a></li>
-        
-            <li><a class="toctree-l4" href="#hilbert_mean_powerself">hilbert_mean_power(self)</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../Hilbert/">Hilbert</a>
                 </li>
                 <li class="">
                     
@@ -113,9 +95,23 @@
                     
     <a class="" href="../Filters/">Filters</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../Graphics/">Graphics</a>
+    <a class="current" href="./">Graphics</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#graphics">Graphics</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#graphics_spectrum_plotself-fig-ax-title-colorff0641-args-kwargs">graphics_spectrum_plot(self, fig, ax, title='', color='#ff0641', args, *kwargs)</a></li>
+        
+            <li><a class="toctree-l4" href="#graphics_time_plotself-fig-ax-title-colorff0641-args-kwargs">graphics_time_plot(self, fig, ax, title='', color='#ff0641', args, *kwargs)</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -150,10 +146,10 @@
         
       
     
-    <li>Hilbert</li>
+    <li>Graphics</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Hilbert.md"
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Plugins/Graphics.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -163,53 +159,47 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="hilbert">Hilbert</h2>
-<p>The plugin for calculating Hilbert Transform</p>
-<h3 id="hilbert-dict">hilbert: dict</h3>
-<p>The data structure which stores all the calculated values, like the power, amplitude, phase.</p>
-<table>
-<thead>
-<tr>
-<th>field</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>data</td>
-<td>hilbert transform</td>
-</tr>
-<tr>
-<td>amplitude</td>
-<td>the instantaneous amplitude</td>
-</tr>
-<tr>
-<td>power</td>
-<td>the instantaneous power</td>
-</tr>
-<tr>
-<td>phase</td>
-<td>the instantaneous phase</td>
-</tr>
-</tbody>
-</table>
-<h3 id="hilbert_transformself-phase_freq0">hilbert_transform(self, phase_freq=0)</h3>
-<p>Calculates the Hilbert Transform. The <code>phase_freq</code> is used to determine for which frequency is the instantaneous phase 
-to be calculated. It populates all the values of the <code>hilbert</code> dictionary.</p>
+                <h2 id="graphics">Graphics</h2>
+<p>Simple graphing functions to show the basic info about the signal</p>
+<h3 id="graphics_spectrum_plotself-fig-ax-title-colorff0641-args-kwargs">graphics_spectrum_plot(self, fig, ax, title='', color='#ff0641', <em>args, </em>*kwargs)</h3>
+<p>Plots the value of the calculated <code>spectrum</code> for each channel on a separate subplot.</p>
 <h5 id="params">Params</h5>
 <ul>
-<li><strong>phase_freq</strong>: when calculating the instantaneous phase, we need to know for which frequency to calculate it. </li>
+<li><strong>fig</strong>: A matplotlib figure object</li>
+<li><strong>ax</strong>: A matplotlib axis object. There must be the same amount of axies as channels.</li>
+<li><strong>title</strong>: The figure title</li>
+<li><strong>color</strong>: The color of the figure plot</li>
+<li><strong>args &amp; kwargs</strong>: Other arguments to the <code>matplotlib.pyplot.plot</code> function</li>
 </ul>
-<h3 id="hilbert_subtract_baseself-low-high">hilbert_subtract_base(self, low, high)</h3>
-<p>Calculates the mean power from the power between <code>low</code> and <code>high</code>, then subtracts the mean value from the entire power vector.
-Calculates for each channel separately.</p>
+<h5 id="example">Example</h5>
+<pre><code class="python">sig.fourier_transform()
+
+fig, ax = plt.subplots(nrows=sig.num_channels, ncols=1)
+
+sig.graphics_spectrum_plot(fig, ax, 'Custom Title', alpha=0.3)
+
+plt.show()
+plt.close()
+</code></pre>
+
+<h3 id="graphics_time_plotself-fig-ax-title-colorff0641-args-kwargs">graphics_time_plot(self, fig, ax, title='', color='#ff0641', <em>args, </em>*kwargs)</h3>
+<p>Plots the value of the <code>data</code> for each channel on a separate subplot.</p>
 <h5 id="params_1">Params</h5>
 <ul>
-<li><strong>low</strong>: the start time (in seconds) from where to calculate the mean.</li>
-<li><strong>high</strong>: the end time (in seconds) from where to calculate the mean.</li>
+<li><strong>fig</strong>: A matplotlib figure object</li>
+<li><strong>ax</strong>: A matplotlib axis object</li>
+<li><strong>title</strong>: The figure title</li>
+<li><strong>color</strong>: The color of the figure plot</li>
+<li><strong>args &amp; kwargs</strong>: Other arguments to the <code>matplotlib.pyplot.plot</code> function</li>
 </ul>
-<h3 id="hilbert_mean_powerself">hilbert_mean_power(self)</h3>
-<p>Calculates the mean power across epochs.</p>
+<h5 id="example_1">Example</h5>
+<pre><code class="python">fig, ax = plt.subplots(nrows=sig.num_channels, ncols=1)
+
+sig.graphics_time_plot(fig, ax, 'Custom Title', alpha=0.3)
+
+plt.show()
+plt.close()
+</code></pre>
               
             </div>
           </div>
@@ -217,10 +207,10 @@ Calculates for each channel separately.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Welch/" class="btn btn-neutral float-right" title="Welch">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Create Custom Plugins/" class="btn btn-neutral float-right" title="Create Custom Plugins">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Fourier/" class="btn btn-neutral" title="Fourier"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Filters/" class="btn btn-neutral" title="Filters"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -248,10 +238,10 @@ Calculates for each channel separately.</p>
           <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Fourier/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Filters/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Welch/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Create Custom Plugins/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
