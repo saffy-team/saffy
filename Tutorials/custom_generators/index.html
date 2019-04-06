@@ -9,7 +9,7 @@
   
   <link rel="shortcut icon" href="../../favicon.ico">
   
-  <title>Basics - Saffy</title>
+  <title>Custom Generators - Saffy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Basics";
-    var mkdocs_page_input_path = "Tutorials/Basics.md";
+    var mkdocs_page_name = "Custom Generators";
+    var mkdocs_page_input_path = "Tutorials/custom_generators.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -59,31 +59,25 @@
 		
     <span class="caption-text">Tutorials</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Basics/">Basics</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Basics</a>
+    <a class="current" href="./">Custom Generators</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#tutorial-basics">Tutorial: Basics</a></li>
+    <li class="toctree-l3"><a href="#tutorial-custom-generators">Tutorial: Custom Generators</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#setup">Setup</a></li>
-        
-            <li><a class="toctree-l4" href="#loading-some-data">Loading some data</a></li>
-        
-            <li><a class="toctree-l4" href="#basic-time-plotting">Basic time plotting</a></li>
-        
-            <li><a class="toctree-l4" href="#basic-spectral-plotting">Basic spectral plotting</a></li>
+            <li><a class="toctree-l4" href="#simple-sine-generator">Simple Sine Generator.</a></li>
         
         </ul>
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../custom_generators/">Custom Generators</a>
                 </li>
     </ul>
 	    </li>
@@ -154,10 +148,10 @@
         
       
     
-    <li>Basics</li>
+    <li>Custom Generators</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Tutorials/Basics.md"
+        <a href="https://github.com/saffy-team/saffy/edit/master/docs/Tutorials/custom_generators.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -167,34 +161,47 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="tutorial-basics">Tutorial: Basics</h2>
-<p>An introductory tutorial to get you familiar with how easy it is to do analysis with saffy.</p>
-<h4 id="setup">Setup</h4>
-<p>First we need to install the package using pip</p>
-<p><code>pip3 install saffy</code></p>
-<h4 id="loading-some-data">Loading some data</h4>
-<p>We first need to generate our data. For that we will use the built in generator <a href="">simple_sine_generator</a>. How generators
-work will be discussed in a later tutorial for now let's concentrate on the latter parts.</p>
-<pre><code class="python">import saffy
-
-sig = saffy.SignalManager(generator=saffy.generators.simple_sine_generator(10, 0, 1, 128))
+                <h2 id="tutorial-custom-generators">Tutorial: Custom Generators</h2>
+<p>In the last tutorial we used a generator to provide us some data to work with. Now we will look at what it takes
+to create a custom generator.</p>
+<h4 id="simple-sine-generator">Simple Sine Generator.</h4>
+<p>We will first start off with writing a simple sine wave generator.
+We will build a single epoch and single channeled sine wave.</p>
+<pre><code class="python">def sine_wave_generator(frequency, phase, length, sampling_rate):
+    data = {
+            'fs': sampling_rate,
+            'num_channels': 1,
+            'channel_names': ['sine'],
+            'epochs': 1
+        }
 </code></pre>
 
-<p>We now have a sine signal of 10 Hz frequency, 0 phase shift, 1 second long and a sampling rate of 128.
-We can now easily plot the signal and see what was loaded in.</p>
-<h4 id="basic-time-plotting">Basic time plotting</h4>
-<pre><code class="python">sig.graphics_time_plot()
+<p>We first need to define our data holding dictionary. It is the constructing element of our signal.
+Let's add the sine function itself. The <code>data</code> dictionary can hold any of the values specified in the <a href="/SignalManager">SignalManger</a>
+documentation.</p>
+<p>The next step is to add the signal itself. This is done in the classical way like you would normally create a sine wave.</p>
+<pre><code class="python">import numpy as np
+
+def sine_wave_generator(frequency, phase, length, sampling_rate):
+    data = {
+            'fs': sampling_rate,
+            'num_channels': 1,
+            'channel_names': ['sine'],
+            'epochs': 1
+        }
+
+    data['t'] = np.arange(0, length, 1 / data['fs'])
+    data['data'] = np.sin(2 * np.pi * frequency * data['t'] + phase)
+    data['data'] = np.reshape(data['data'], (data['epochs'], data['num_channels'], *data['data'].shape))
+
+    return data
 </code></pre>
 
-<p><img alt="basic_sine_wave" src="https://res.cloudinary.com/ppierzc/image/upload/v1554563066/basics_ke2rbs.png" /></p>
-<h4 id="basic-spectral-plotting">Basic spectral plotting</h4>
-<p>Now let's calculate the real Fourier transform and plot the spectrum.</p>
-<pre><code class="python">sig.fourier_transform()
-sig.graphics_spectrum_plot()
-</code></pre>
-
-<p><img alt="basic_sine_spectrum" src="https://res.cloudinary.com/ppierzc/image/upload/v1554563611/spectrum_wmnunw.png" /></p>
-<p>And that is it you have done some basic Fourier signal analysis.</p>
+<p>And this set's us up. We first created the time vector and then from the definition of a sine wave we created,
+the data variable.
+We need to reshape the data however to account for the number of epochs and channels. 
+We have to then return it so that the SignalManager will be able to read the specifications of our signal.</p>
+<p>With this principle you can load in any format of data you will need.</p>
               
             </div>
           </div>
@@ -202,10 +209,10 @@ sig.graphics_spectrum_plot()
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../custom_generators/" class="btn btn-neutral float-right" title="Custom Generators">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../SignalManager/" class="btn btn-neutral float-right" title="SignalManager">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Basics/" class="btn btn-neutral" title="Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -233,10 +240,10 @@ sig.graphics_spectrum_plot()
           <a href="https://github.com/saffy-team/saffy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Basics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../custom_generators/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../SignalManager/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
