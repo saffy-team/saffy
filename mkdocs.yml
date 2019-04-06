@@ -8,6 +8,7 @@ nav:
   - Home: 'index.md'
   - Tutorials:
     - Basics: 'Tutorials/Basics.md'
+    - Custom Generators: 'Tutorials/custom_generators.md'
   - SignalManager: 'SignalManager.md'
   - Plugins:
       - PluginManager: 'Plugins/PluginManager.md'
