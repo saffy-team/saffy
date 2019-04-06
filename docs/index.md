@@ -14,6 +14,9 @@ Rightfully so! That's why saffy was created, so that you don't have to come up w
 So that you can concentrate on the fun and important part which is the analysis! When you come up with a solution you like,
 you already have it as part of the framework, so it is easy to use in the future.
 
+[Slack Channel](https://join.slack.com/t/saffyworkspace/shared_invite/enQtNTg4NjMxMzY4MDUwLTAzYTUyNTllYWM1ODE5YzI0YTU3MDJkYTAzMGJjNDQ1MzIxZTY4MmQ5NDQyZTE2ODI2NTk5OTViNDgyZGY2ODc)
+\- [Github](https://github.com/saffy-team/saffy)
+
 ## Features
 - Write 50% less code than before
 - You concentrate on the fun logic stuff and let saffy do the boring repetetive tasks.
@@ -30,19 +33,8 @@ you already have it as part of the framework, so it is easy to use in the future
 `pip3 install saffy`
 
 ###### From Source
-Using a virtualenv is recommended! 
 
 `!pip3 install -U https://api.github.com/repos/saffy-team/saffy/zipball/master`
-
-or if you want the source code
-
-Download the package to your project directory
-
-`git clone https://github.com/saffy-team/saffy.git`
-
-Install dependencies
-
-`pip3 install -r ./saffy/requirements.txt`
 
 ## Usage
 ```python
@@ -80,5 +72,6 @@ For comparison you can see the attached [solution](https://github.com/saffy-team
 
 ## Contributing
 If you like the project and want to add something to it then please create a pull request.
+
 - The title should shortly summarize the goal of your addition
 - In the description go in depth with the changes you have made and why.

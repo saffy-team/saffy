@@ -6,8 +6,14 @@ site_favicon: favicon.ico
 repo_url: https://github.com/saffy-team/saffy
 nav:
   - Home: 'index.md'
+  - Tutorials:
+    - Basics: 'Tutorials/Basics.md'
   - SignalManager: 'SignalManager.md'
   - Plugins:
+      - PluginManager: 'Plugins/PluginManager.md'
+      - Fourier: 'Plugins/Fourier.md'
       - Hilbert: 'Plugins/Hilbert.md'
       - Welch: 'Plugins/Welch.md'
-      - Create Custom Plugin: 'Plugins/Create Custom Plugin.md'
+      - Filters: 'Plugins/Filters.md'
+      - Graphics: 'Plugins/Graphics.md'
+      - Create Custom Plugins: 'Plugins/Create Custom Plugins.md'

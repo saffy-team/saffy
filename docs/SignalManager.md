@@ -48,46 +48,52 @@ saffy.SignalManager(filename='data')
 Uses a channel as the tag indicator. Normalizes the value to 1 through divided by the maximum value. Sets threshold at 0.9.
 Sets tag at beginnings of resultant clusters.
 
+##### Params
+- **channel_name**: the string name of the channel to set tags from.
+
 ### set_epochs_from_tags(self, low, high)
 Uses the tag list to cut the data into epochs. The `low` and `high` tell us where to cut
 based on the tags. They are in seconds. For example if you want to cut between 2 seconds before and 3 after the tag you would write
 `sig.set_epochs_from_tags(-2, 3)`.
 
+##### Params
+- **low**: In seconds. Starting time of the epoch relative to the tag. The tag is 0 seconds.
+- **high**: In seconds. Ending time of the epoch relative to the tag. The tag is 0 seconds.
+
 ### remove_channels(self, channel_names)
 Removes the specified channels from the data.
 
 ##### Params
-
-- channel_names: list of strings
+- **channel_names**: list of strings
 
 ### extract_channels(self, channel_names)
-Removes all channels except for those provided in the `channel_names' parameter.
+Removes all channels except for those provided in the `channel_names` parameter.
 
 ##### Params
 
-- channel_names: list of strings
+- **channel_names**: list of strings
 
 ### extract_time_range(self, low, high)
 Cuts data to the provided `low` and `high` arguments.
 
 ##### Params
 
-- low: starting point of new signal in seconds.
-- high: end point of new signal in seconds.
+- **low**: starting point of new signal in seconds.
+- **high**: end point of new signal in seconds.
 
 ### copy(self, name="")
 Creates a independent copy of the SignalManager object.
 
 ##### Params
 
-- name: a documenting value to keep track why we are coping the signal. 
+- **name**: a documenting value to keep track why we are coping the signal. 
 
 ### call(self, func)
 Used to run single custom functions on the data. Allows consistency when building analysis piplines.
 
 ##### Params
 
-- func: a function that takes only self as the parameter.
+- **func**: a function that takes only self as the parameter.
 
 ##### Example
 You should do this:
@@ -109,7 +115,7 @@ custom_function(sig)
 Use this to add a custom plugin to be used with the SignalManager
 
 ##### Params
-- plugin: An instance of the [PluginManager]() class.
+- **plugin**: An instance of the [PluginManager](/Plugins/PluginManager) class.
 
 ##### Example
 Create a custom plugin.
@@ -134,3 +140,12 @@ saffy.SignalManager.register_plugin(CustomPlugin)
 ### History
 All the operations on the signal are stored in the history parameter. It allows to keep track of the changes that have been
 made to the signal.
+
+### Chaining
+Each method returns self, so chaining of functions is possible. For example setting tags could be done this way.
+```python
+sig = SignalManager(filename='path/to/file')\
+    .extract_channels(['C3', 'C4', 'trig'])\
+    .set_tags_from_channel('trig')\
+    .remove_channel('trig')
+```

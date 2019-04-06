@@ -11,8 +11,16 @@ class GraphicsPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-	def graphics_spectrum_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+	def graphics_spectrum_plot(self, fig=None, ax=None, title='', xlabel='', ylabel='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
+
+		show = False
+		if not fig or not ax:
+			show = True
+			fig, ax = plt.subplots(nrows=self.num_channels, ncols=1)
+
+		if self.num_channels == 1:
+			ax = [ax]
 
 		for epoch in self.spectrum:
 			for idx, channel in enumerate(epoch):
@@ -37,7 +45,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.5,
 					0.05,
-					'Cześtotliwość [Hz]',
+					xlabel,
 					ha='center',
 					fontsize=20
 				)
@@ -51,7 +59,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.04,
 					0.5,
-					'Amplituda [$\mu$V]',
+					ylabel,
 					va='center',
 					rotation='vertical',
 					fontsize=20
@@ -59,8 +67,20 @@ class GraphicsPlugin(PluginManager):
 
 				fig.patch.set_facecolor('#ffffff')
 
-	def graphics_time_plot(self, fig, ax, title='', color='#ff0641', *args, **kwargs):
+		if show:
+			plt.show()
+			plt.close()
+
+	def graphics_time_plot(self, fig=None, ax=None, title='', xlabel='', ylabel='', color='#ff0641', *args, **kwargs):
 		plt.style.use('classic')
+
+		show = False
+		if not fig or not ax:
+			show = True
+			fig, ax = plt.subplots(nrows=self.num_channels, ncols=1)
+
+		if self.num_channels == 1:
+			ax = [ax]
 
 		for epoch in self.data:
 			for idx, channel in enumerate(epoch):
@@ -92,7 +112,7 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.5,
 					0.05,
-					'Czas [s]',
+					xlabel,
 					ha='center',
 					fontsize=20
 				)
@@ -106,13 +126,17 @@ class GraphicsPlugin(PluginManager):
 				fig.text(
 					0.04,
 					0.5,
-					'Wartość Sygnału [$\mu$V]',
+					ylabel,
 					va='center',
 					rotation='vertical',
 					fontsize=20
 				)
 
 				fig.patch.set_facecolor('#ffffff')
+
+		if show:
+			plt.show()
+			plt.close()
 
 	def __str__(self):
 		return 'Graphics'
