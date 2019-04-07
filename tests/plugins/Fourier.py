@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 
-from ... import SignalManager
+from saffy import SignalManager
 from ..mocks import sine_wave
 
 

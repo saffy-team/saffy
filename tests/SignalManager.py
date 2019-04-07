@@ -1,7 +1,7 @@
 import unittest
 
-from .. import PluginManager
-from .. import SignalManager
+from saffy import PluginManager
+from saffy import SignalManager
 
 from .mocks import sine_wave
 

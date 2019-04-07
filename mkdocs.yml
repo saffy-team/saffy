@@ -18,3 +18,4 @@ nav:
       - Filters: 'Plugins/Filters.md'
       - Graphics: 'Plugins/Graphics.md'
       - Create Custom Plugins: 'Plugins/Create Custom Plugins.md'
+  - FAQ: 'faq.md'

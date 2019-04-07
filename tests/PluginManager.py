@@ -1,6 +1,6 @@
 import unittest
 
-from .. import PluginManager
+from saffy import PluginManager
 
 
 class TestPluginManager(unittest.TestCase):
