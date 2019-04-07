@@ -17,6 +17,10 @@ you already have it as part of the framework, so it is easy to use in the future
 [Slack Channel](https://join.slack.com/t/saffyworkspace/shared_invite/enQtNTg4NjMxMzY4MDUwLTAzYTUyNTllYWM1ODE5YzI0YTU3MDJkYTAzMGJjNDQ1MzIxZTY4MmQ5NDQyZTE2ODI2NTk5OTViNDgyZGY2ODc)
 \- [Github](https://github.com/saffy-team/saffy)
 
+
+Check out how much code you can spare!
+![efficient_example](https://res.cloudinary.com/ppierzc/image/upload/v1554567294/Saffy_example_mzqiz7.gif)
+
 ## Features
 - Write 50% less code than before
 - You concentrate on the fun logic stuff and let saffy do the boring repetetive tasks.
