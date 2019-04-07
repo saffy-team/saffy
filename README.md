@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/saffy-team/saffy/branch/master/graph/badge.svg)](https://codecov.io/gh/saffy-team/saffy)
 [![Downloads](https://pepy.tech/badge/saffy)](https://pepy.tech/project/saffy)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ddf809765b55425fb4e769d002d6bd8a)](https://www.codacy.com/app/PPierzc/saffy?utm_source=github.com&utm_medium=referral&utm_content=saffy-team/saffy&utm_campaign=Badge_Grade)
-
+![Status Badge](https://img.shields.io/badge/status-alpha-important.svg)
 ## A High-Level Signal Analysis Framework
 
 Ever too often in signal analysis is time wasted on the repetitive tasks, which are very similar across projects. You promise yourself
