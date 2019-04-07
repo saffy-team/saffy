@@ -1,4 +1,4 @@
-from scipy.signal import butter, filtfilt, iirnotch, cheby2
+from scipy.signal import butter, filtfilt, cheby2
 
 from .PluginManager import PluginManager
 
