@@ -15,16 +15,6 @@ Rightfully so! That's why saffy was created, so that you don't have to come up w
 So that you can concentrate on the fun and important part which is the analysis! When you come up with a solution you like,
 you already have it as part of the framework, so it is easy to use in the future.
 
-
-Ever too often in signal analysis is time wasted on the repetitive tasks, which are very similar across projects. You promise yourself
-to build a code base for your solutions, but end up just copy pasting whole chunks of code. Starting each project you hope that this time you will
-have good structure and it will be awesome to work with. But it most often fails.
-Probably because your on a deadline or building sustainable data architectures is not your thing, you just wanted to do some analysis.
-
-Rightfully so! That's why saffy was created, so that you don't have to come up with a data structure and architecture.
-So that you can concentrate on the fun and important part which is the analysis! When you come up with a solution you like,
-you already have it as part of the framework, so it is easy to use in the future.
-
 [Slack Channel](https://join.slack.com/t/saffyworkspace/shared_invite/enQtNTg4NjMxMzY4MDUwLTAzYTUyNTllYWM1ODE5YzI0YTU3MDJkYTAzMGJjNDQ1MzIxZTY4MmQ5NDQyZTE2ODI2NTk5OTViNDgyZGY2ODc)
 \- [Github](https://github.com/saffy-team/saffy) - [Documentation](https://saffy-team.github.io/saffy/)
 
