@@ -3,6 +3,9 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
 [![Build Status](https://travis-ci.org/saffy-team/saffy.svg?branch=master)](https://travis-ci.org/saffy-team/saffy)
+[![codecov](https://codecov.io/gh/saffy-team/saffy/branch/master/graph/badge.svg)](https://codecov.io/gh/saffy-team/saffy)
+[![Downloads](https://pepy.tech/badge/saffy)](https://pepy.tech/project/saffy)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ddf809765b55425fb4e769d002d6bd8a)](https://www.codacy.com/app/PPierzc/saffy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=saffy-team/saffy&amp;utm_campaign=Badge_Grade)
 
 ## A High-Level Signal Analysis Framework
 
