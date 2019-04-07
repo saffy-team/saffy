@@ -1,11 +1,12 @@
 # Saffy: Signal Analysis made simple
+
 <img src="https://res.cloudinary.com/ppierzc/image/upload/v1554243272/saffy_logo_hc4atf.png" width="250px" alt="Saffy Logo" />
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/saffy-team/saffy/blob/master/LICENSE.txt)
 [![Build Status](https://travis-ci.org/saffy-team/saffy.svg?branch=master)](https://travis-ci.org/saffy-team/saffy)
 [![codecov](https://codecov.io/gh/saffy-team/saffy/branch/master/graph/badge.svg)](https://codecov.io/gh/saffy-team/saffy)
 [![Downloads](https://pepy.tech/badge/saffy)](https://pepy.tech/project/saffy)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ddf809765b55425fb4e769d002d6bd8a)](https://www.codacy.com/app/PPierzc/saffy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=saffy-team/saffy&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ddf809765b55425fb4e769d002d6bd8a)](https://www.codacy.com/app/PPierzc/saffy?utm_source=github.com&utm_medium=referral&utm_content=saffy-team/saffy&utm_campaign=Badge_Grade)
 
 ## A High-Level Signal Analysis Framework
 
@@ -21,26 +22,27 @@ you already have it as part of the framework, so it is easy to use in the future
 [Slack Channel](https://join.slack.com/t/saffyworkspace/shared_invite/enQtNTg4NjMxMzY4MDUwLTAzYTUyNTllYWM1ODE5YzI0YTU3MDJkYTAzMGJjNDQ1MzIxZTY4MmQ5NDQyZTE2ODI2NTk5OTViNDgyZGY2ODc)
 \- [Github](https://github.com/saffy-team/saffy) - [Documentation](https://saffy-team.github.io/saffy/)
 
-
 Check out how much code you can spare!
 ![efficient_example](https://res.cloudinary.com/ppierzc/image/upload/v1554567294/Saffy_example_mzqiz7.gif)
 
 ## Features
-- Write 50% less code than before
-- You concentrate on the fun logic stuff and let saffy do the boring repetetive tasks.
-- Lost in variables and data? Saffy provides a data architecture to keep it clean. 
-- Quick prototyping of signal analysis algorithms
-- Reproducibility of solutions
-- Clean, readable and organized code
-- Your code-base can easily expand over multiple projects
-- A clean pipline from modeled signals to real-world data
-- Less of that brain-less and repetitive work
+
+-   Write 50% less code than before
+-   You concentrate on the fun logic stuff and let saffy do the boring repetetive tasks.
+-   Lost in variables and data? Saffy provides a data architecture to keep it clean. 
+-   Quick prototyping of signal analysis algorithms
+-   Reproducibility of solutions
+-   Clean, readable and organized code
+-   Your code-base can easily expand over multiple projects
+-   A clean pipline from modeled signals to real-world data
+-   Less of that brain-less and repetitive work
 
 ## Install
 
 `pip3 install saffy`
 
 ###### From Source
+
 Using a virtualenv is recommended! 
 
 `!pip3 install -U https://api.github.com/repos/saffy-team/saffy/zipball/master`
@@ -56,47 +58,51 @@ Install dependencies
 `pip3 install -r ./saffy/requirements.txt`
 
 ## Usage
+
 ```python
 import saffy
 sig = saffy.SignalManager(generator=signal_data)
 ```
 
 #### Basic SignalManager instance structure
-| field | description |
-|--------|------|
-| fs   | sampling frequency  |
-| num_channels | number of channels |
-| channel_names | name for each channel |
-| data | the signal in the structure of (epoch x channel x signal) |
-| t | time vector |
-| epochs | number of epochs |
-| tags | position of tags in signal |
-| spectrum | matrix of spectrum |
-| spectrum_freqs| vector of frequencies |
-| phase | matrix of phase |
+
+| field          | description                                               |
+| -------------- | --------------------------------------------------------- |
+| fs             | sampling frequency                                        |
+| num_channels   | number of channels                                        |
+| channel_names  | name for each channel                                     |
+| data           | the signal in the structure of (epoch x channel x signal) |
+| t              | time vector                                               |
+| epochs         | number of epochs                                          |
+| tags           | position of tags in signal                                |
+| spectrum       | matrix of spectrum                                        |
+| spectrum_freqs | vector of frequencies                                     |
+| phase          | matrix of phase                                           |
 
 #### SignalManager init function
+
 It takes one labelled argument: `generator` or `filename`.
 
 ###### Generator
+
 A dictionary of the structure
-```
-data = {
-      'fs': # float,
-      'num_channels': # integer,
-      'channel_names': # list of strings,
-      'epochs': # integer,
-      't': # time array,
-      'tags': # list,
-      'data': # Signal Matrix
-  }
-```
+
+    data = {
+          'fs': # float,
+          'num_channels': # integer,
+          'channel_names': # list of strings,
+          'epochs': # integer,
+          't': # time array,
+          'tags': # list,
+          'data': # Signal Matrix
+      }
 
 ```python
 saffy.SignalManager(generator=data)
 ```
 
 ###### Filename
+
 The name of the file generated by Svarog. 3 files eg. `data.raw`, `data.xml`, `data.tag`
 
 ```python
@@ -104,22 +110,28 @@ saffy.SignalManager(filename='data')
 ```
 
 ## Plugins
+
 Plugins are classes that inherit from the PluginManager. They extend the functionality of the basic Signal Manager.
 Some plugins are provided out of the box
 
 #### Filters
+
 Adds basic filters
 
 #### Graphics
+
 Adds functions to display the signal data
 
 #### Welch
+
 Calculating the Welch Spectrum
 
 #### Hilbert
+
 Calculating the Hilbert Transform
 
 ### Creating Custom Plugins
+
 You might want to add some custom features.
 
 The proposed convention for plugin development is the following.
@@ -151,6 +163,7 @@ sig.custom_function()
 ```
 
 ## Example
+
 A short example of how to use saffy for EEG data analysis.
 
 ```python
@@ -174,8 +187,8 @@ POST_EEG = EEG\
 	.copy('post')\
 	.set_epochs_from_tags(0.5, 2.5)\
 	.welch_mean_spectrum()
-
 ```
+
 With just this code we managed to calculate the mean spectrum using Welch's method for the signal before and after the trigger.
 
 ```python
@@ -207,9 +220,12 @@ for a in ax:
 plt.show()
 plt.close()
 ```
+
 ![alt text](examples/example.png)
 
 ## Contributing
+
 If you like the project and want to add something to it then please create a pull request.
-- The title should shortly summarize the goal of your addition
-- In the description go in depth with the changes you have made and why.
+
+-   The title should shortly summarize the goal of your addition
+-   In the description go in depth with the changes you have made and why.

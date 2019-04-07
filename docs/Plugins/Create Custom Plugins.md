@@ -8,7 +8,7 @@ as the plugin.
 
 Plugin functions should be preceded by the plugin name. 
 
-### Class Implementation 
+### Class Implementation
 
 ```python
 import saffy

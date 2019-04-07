@@ -12,6 +12,6 @@ jobs:
     script: nosetests -v --with-coverage tests/*
     after_success:
     - codecov
-  - stage: "Deploy"
-    name: "Deploy Github Pages"
-    script: mkdocs gh-deploy
+#  - stage: "Deploy"
+#    name: "Deploy Github Pages"
+#    script: mkdocs gh-deploy

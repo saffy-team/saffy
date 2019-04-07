@@ -1,8 +1,10 @@
 ## Tutorial: Custom Generators
+
 In the last tutorial we used a generator to provide us some data to work with. Now we will look at what it takes
 to create a custom generator.
 
 #### Simple Sine Generator.
+
 We will first start off with writing a simple sine wave generator.
 We will build a single epoch and single channeled sine wave.
 
@@ -15,6 +17,7 @@ def sine_wave_generator(frequency, phase, length, sampling_rate):
 			'epochs': 1
 		}
 ```
+
 We first need to define our data holding dictionary. It is the constructing element of our signal.
 Let's add the sine function itself. The `data` dictionary can hold any of the values specified in the [SignalManger](/SignalManager)
 documentation.
@@ -38,6 +41,7 @@ def sine_wave_generator(frequency, phase, length, sampling_rate):
     
     return data
 ```
+
 And this set's us up. We first created the time vector and then from the definition of a sine wave we created,
 the data variable.
 We need to reshape the data however to account for the number of epochs and channels. 
