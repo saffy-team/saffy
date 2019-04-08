@@ -11,7 +11,18 @@ class GraphicsPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-	def graphics_spectrum_plot(self, fig=None, ax=None, title='', xlabel='', ylabel='', color='#ff0641', *args, **kwargs):
+	def graphics_spectrum_plot(
+			self,
+			fig=None,
+			ax=None,
+			title='',
+			xlabel='',
+			ylabel='',
+			legend=False,
+			color='#ff0641',
+			*args,
+			**kwargs
+	):
 		plt.style.use('classic')
 
 		show = False
@@ -67,13 +78,32 @@ class GraphicsPlugin(PluginManager):
 
 				fig.patch.set_facecolor('#ffffff')
 
+			# We only want the label to show once if multiple epochs
+			if 'label' in kwargs:
+				del kwargs['label']
+
+		if legend:
+			for a in ax:
+				a.legend()
+
 		if show:
 			plt.show()
 			plt.close()
 
-	def graphics_time_plot(self, fig=None, ax=None, title='', xlabel='', ylabel='', color='#ff0641', *args, **kwargs):
+	def graphics_time_plot(
+			self,
+			fig=None,
+			ax=None,
+			title='',
+			xlabel='',
+			ylabel='',
+			legend=False,
+			color='#ff0641',
+			*args,
+			**kwargs):
 		plt.style.use('classic')
 
+		# We will show the graph if no fig or ax is shown. Assuming that this is the desired action.
 		show = False
 		if not fig or not ax:
 			show = True
@@ -133,6 +163,14 @@ class GraphicsPlugin(PluginManager):
 				)
 
 				fig.patch.set_facecolor('#ffffff')
+
+			# We only want the label to show once if multiple epochs
+			if 'label' in kwargs:
+				del kwargs['label']
+
+		if legend:
+			for a in ax:
+				a.legend()
 
 		if show:
 			plt.show()
