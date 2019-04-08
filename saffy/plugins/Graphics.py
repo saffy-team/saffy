@@ -18,7 +18,7 @@ class GraphicsPlugin(PluginManager):
 			title='',
 			xlabel='',
 			ylabel='',
-			legend=False,
+			legend=True,
 			color='#ff0641',
 			*args,
 			**kwargs
@@ -97,7 +97,7 @@ class GraphicsPlugin(PluginManager):
 			title='',
 			xlabel='',
 			ylabel='',
-			legend=False,
+			legend=True,
 			color='#ff0641',
 			*args,
 			**kwargs):
