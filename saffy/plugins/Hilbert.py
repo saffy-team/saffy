@@ -30,9 +30,9 @@ class HilbertPlugin(PluginManager):
 
 		for epoch in range(self.epochs):
 			for channel in range(self.num_channels):
-				self.hilbert['power'][epoch, channel] -= np.mean(
-					self.hilbert['power'][epoch, channel, low_samp: high_samp]
-				)
+				base = np.mean(self.hilbert['power'][epoch, channel, low_samp: high_samp])
+				self.hilbert['power'][epoch, channel] -= base
+				self.hilbert['power'][epoch, channel] /= base
 
 	def hilbert_mean_power(self):
 		self.hilbert['power'] = np.mean(self.hilbert['power'], axis=0)
