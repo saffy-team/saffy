@@ -26,7 +26,7 @@ class GraphicsPlugin(PluginManager):
 		plt.style.use('classic')
 
 		show = False
-		if not fig or not ax:
+		if fig is None or ax is None:
 			show = True
 			fig, ax = plt.subplots(nrows=self.num_channels, ncols=1)
 
@@ -105,9 +105,9 @@ class GraphicsPlugin(PluginManager):
 
 		# We will show the graph if no fig or ax is shown. Assuming that this is the desired action.
 		show = False
-		if not fig or not ax:
-			show = True
-			fig, ax = plt.subplots(nrows=self.num_channels, ncols=1)
+		if fig is None or ax is None:
+				show = True
+				fig, ax = plt.subplots(nrows=self.num_channels, ncols=1)
 
 		if self.num_channels == 1:
 			ax = [ax]
