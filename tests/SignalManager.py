@@ -9,7 +9,7 @@ from .mocks import sine_wave
 class TestSignalManager(unittest.TestCase):
     @staticmethod
     def smoke_test():
-        SignalManager()
+        SignalManager(sine_wave())
 
     def register_plugin_test(self):
         class TestPlugin(PluginManager):
@@ -25,7 +25,7 @@ class TestSignalManager(unittest.TestCase):
         self.assertTrue(TestPlugin in SignalManager.__bases__,
                         'TestPlugin should be a subclass of the PluginManager')
 
-        sig = SignalManager()
+        sig = SignalManager(sine_wave())
         self.assertEqual([], sig.custom_function())
 
     def duplicate_register_plugin_test(self):
@@ -45,12 +45,12 @@ class TestSignalManager(unittest.TestCase):
         self.assertTrue(length_after - length_before == 1,
                         'Should not create duplicate plugins')
 
-        sig = SignalManager()
+        sig = SignalManager(sine_wave())
         self.assertEqual([], sig.custom_function())
 
     def add_history_test(self):
 
-        sig = SignalManager(generator=sine_wave())
+        sig = SignalManager(sine_wave())
 
         sig.remove_channels(['sine'])
 
@@ -80,7 +80,7 @@ class TestSignalManager(unittest.TestCase):
             'epochs': 1
         }
 
-        sig = SignalManager(generator=sine_wave(data=data))
+        sig = SignalManager(sine_wave(data=data))
 
         sig.extract_time_range(0, 1)
 
