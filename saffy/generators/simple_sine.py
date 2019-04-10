@@ -5,7 +5,7 @@ def sin(t, f, p):
 	return np.sin(2 * np.pi * f * t + p)
 
 
-def simple_sine_generator(freq=10, phase=0, length=20, sampling_frequency=512, data=None):
+def simple_sine(freq=10, phase=0, length=20, sampling_frequency=512, data=None):
 	if not data:
 		data = {
 			'fs': sampling_frequency,

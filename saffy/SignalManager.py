@@ -2,57 +2,28 @@ import numpy as np
 
 import types
 
-from obci_readmanager.signal_processing.read_manager import ReadManager
-
 from saffy.plugins import *
 
 plugins = PluginManager.__subclasses__()
 
 
 class SignalManager(*plugins):
-    def __init__(self, name='', *args, **kwargs):
+    def __init__(self, generator, name='', *args, **kwargs):
         for plugin in SignalManager.__bases__:
             super(plugin, self).__init__(*args, **kwargs)
 
         self.name = name
 
-        if 'filename' in kwargs:
-            filename = kwargs['filename']
+        self.fs = generator['fs']
 
-            mgr = ReadManager(
-                "%s.xml" %
-                filename,
-                "%s.raw" %
-                filename,
-                "%s.tag" %
-                filename)
+        self.num_channels = generator['num_channels']
+        self.channel_names = generator['channel_names']
 
-            self.fs = int(float(mgr.get_param("sampling_frequency")))
+        self.data = generator['data']
+        self.t = generator['t']
 
-            self.num_channels = int(mgr.get_param("number_of_channels"))
-            self.channel_names = mgr.get_param("channels_names")
-
-            self.data = mgr.get_microvolt_samples()
-            self.data = np.reshape(self.data, (1, *self.data.shape))
-
-            self.t = np.arange(self.data.shape[1]) / self.fs
-
-            self.epochs = 1
-            self.tags = []
-
-        if 'generator' in kwargs:
-            generator = kwargs['generator']
-
-            self.fs = generator['fs']
-
-            self.num_channels = generator['num_channels']
-            self.channel_names = generator['channel_names']
-
-            self.data = generator['data']
-            self.t = generator['t']
-
-            self.epochs = generator['epochs']
-            self.tags = generator['tags'] if 'tags' in generator else []
+        self.epochs = generator['epochs']
+        self.tags = generator['tags'] if 'tags' in generator else []
 
     def __getattribute__(self, attr):
         def call_history(method):
@@ -114,8 +85,10 @@ class SignalManager(*plugins):
         return self
 
     def extract_channels(self, channel_names):
-        channel_ids = [self.channel_names.index(
-            channel_name) for channel_name in channel_names]
+        channel_ids = [
+            self.channel_names.index(channel_name)
+            for channel_name in channel_names
+        ]
 
         self.data = self.data[:, channel_ids, :]
         self.num_channels = len(channel_ids)
@@ -164,7 +137,3 @@ class SignalManager(*plugins):
 
     def __repr__(self):
         return 'Signal Manager'
-
-
-if __name__ == '__main__':
-    SignalManager()
