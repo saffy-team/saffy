@@ -1,6 +1,7 @@
 import numpy as np
 
 import types
+import copy
 
 from saffy.plugins import *
 
@@ -23,7 +24,7 @@ class SignalManager(*plugins):
         self.t = generator['t']
 
         self.epochs = generator['epochs']
-        self.tags = generator['tags'] if 'tags' in generator else []
+        self.tags = generator.get('tags', [])
 
     def __getattribute__(self, attr):
         def call_history(method):
@@ -112,12 +113,12 @@ class SignalManager(*plugins):
     def copy(self, name=''):
         return SignalManager(name=name, generator={
             'fs': self.fs,
-            'num_channels': self.num_channels,
-            'channel_names': self.channel_names,
-            'epochs': self.epochs,
-            'data': self.data,
-            't': self.t,
-            'tags': self.tags
+            'num_channels': copy.copy(self.num_channels),
+            'channel_names': copy.copy(self.channel_names),
+            'epochs': copy.copy(self.epochs),
+            'data': copy.copy(self.data),
+            't': copy.copy(self.t),
+            'tags': copy.copy(self.tags)
         })
 
     def call(self, func):

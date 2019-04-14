@@ -7,13 +7,26 @@ class FiltersPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-	def _butter_lowpass(self, cutoff, order=5):
+	def _butter_lowpass(
+			self,
+			cutoff,
+			*,
+			order=5
+	):
+
 		nyq = 0.5 * self.fs
 		normal_cutoff = cutoff / nyq
 		b, a = butter(order, normal_cutoff, btype='low', analog=False)
 		return b, a
 
-	def butter_lowpass_filter(self, cutoff, order=5, method=None):
+	def butter_lowpass_filter(
+			self,
+			cutoff,
+			*,
+			order=5,
+			method=None
+	):
+
 		b, a = self._butter_lowpass(cutoff, order=order)
 
 		if method:
@@ -24,13 +37,14 @@ class FiltersPlugin(PluginManager):
 	def _cheb2_notch(
 			self,
 			cutoff,
+			*,
 			order=5,
 			rs=3,
 			width=.1,
 			btype='bandstop'
 	):
-		nq = self.fs / 2
 
+		nq = 0.5 * self.fs
 		Wn_min, Wn_max = (cutoff - width) / nq, (cutoff + width) / nq
 		Wn = [Wn_min, Wn_max]
 
@@ -48,13 +62,16 @@ class FiltersPlugin(PluginManager):
 	def cheb2_notch_filter(
 			self,
 			cutoff,
+			*,
 			order=5,
 			rs=3,
 			width=.1,
 			method=None,
 			btype='bandstop'
 	):
-		b, a = self._cheb2_notch(cutoff, order, rs, width, btype=btype)
+
+		b, a = self._cheb2_notch(cutoff, order=order, rs=rs, width=width,\
+								btype=btype)
 
 		if method:
 			self.data = method(b, a, self.data)
@@ -64,8 +81,10 @@ class FiltersPlugin(PluginManager):
 	def _butter_highpass(
 			self,
 			cutoff,
+			*,
 			order=5
 	):
+
 		nyq = 0.5 * self.fs
 		normal_cutoff = cutoff / nyq
 		b, a = butter(order, normal_cutoff, btype='high', analog=False)
@@ -74,9 +93,11 @@ class FiltersPlugin(PluginManager):
 	def butter_highpass_filter(
 			self,
 			cutoff,
+			*,
 			order=5,
 			method=None
 	):
+
 		b, a = self._butter_highpass(cutoff, order=order)
 
 		if method:
@@ -84,20 +105,35 @@ class FiltersPlugin(PluginManager):
 		else:
 			self.data = filtfilt(b, a, self.data)
 
-	def _butter_bandpass(lowcut, highcut, fs, order=5):
-		nyq = 0.5 * fs
+	def _butter_bandpass(
+			self,
+			lowcut,
+			highcut,
+			*,
+			order=5
+	):
+
+		nyq = 0.5 * self.fs
 		low = lowcut / nyq
 		high = highcut / nyq
 		b, a = butter(order, [low, high], btype='band')
 		return b, a
 
-	def butter_bandpass_filter(data, lowcut, highcut, fs, order=5, method=None):
-		b, a = _butter_bandpass(lowcut, highcut, fs, order=order)
+	def butter_bandpass_filter(
+			self,
+			lowcut,
+			highcut,
+			*,
+			order=5,
+			method=None
+	):
+
+		b, a = _butter_bandpass(lowcut, highcut, order=order)
+
 		if method:
-			y = method(b, a, data)
+			self.data = method(b, a, self.data)
 		else:
-			y = filtfilt(b, a, data)
-		return y
+			self.data = filtfilt(b, a, self.data)
 
 	def __str__(self):
 		return 'Filters'
