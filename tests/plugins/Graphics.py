@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 
 
 class TestGraphicsPlugin(unittest.TestCase):
-	def graphics_set_style_test(self):
+	@staticmethod
+	def graphics_set_style_test():
 		freq = 10
 		phase = np.pi / 2
 
@@ -24,7 +25,8 @@ class TestGraphicsPlugin(unittest.TestCase):
 
 		sig.graphics_time_plot()
 
-	def graphics_time_plot_test(self):
+	@staticmethod
+	def graphics_time_plot_test():
 		freq = 10
 		phase = np.pi/2
 

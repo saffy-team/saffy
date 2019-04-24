@@ -11,7 +11,7 @@ class GraphicsPlugin(PluginManager):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-		self.style_templates = {
+		self.graphics_style_templates = {
 			'presentation': {
 				'plot_background': '#ffedf1',
 				'figure_background': '#ffffff',
@@ -34,13 +34,13 @@ class GraphicsPlugin(PluginManager):
 			}
 		}
 
-		self.style = self.style_templates['presentation']
+		self.graphics_style = self.graphics_style_templates['presentation']
 
 	def graphics_set_style(self, style):
 		if isinstance(style, dict):
-			self.style = {**self.style, **style}
-		elif style in self.style_templates.keys():
-			self.style = self.style_templates[style]
+			self.graphics_style = {**self.graphics_style, **style}
+		elif style in self.graphics_style_templates.keys():
+			self.graphics_style = self.graphics_style_templates[style]
 		else:
 			raise ValueError('Unknown style')
 		return self
@@ -57,10 +57,10 @@ class GraphicsPlugin(PluginManager):
 			*args,
 			**kwargs
 	):
-		color = color if color else self.style['line_color']
+		color = color if color else self.graphics_style['line_color']
 
-		if 'plt_style' in self.style.keys():
-			plt.style.use(self.style['plt_style'])
+		if 'plt_style' in self.graphics_style.keys():
+			plt.style.use(self.graphics_style['plt_style'])
 
 		show = False
 		if fig is None or ax is None:
@@ -86,23 +86,23 @@ class GraphicsPlugin(PluginManager):
 					self.channel_names[idx],
 					fontsize=20
 				)
-				ax[idx].set_facecolor(self.style['plot_background'])
-				ax[idx].tick_params(labelsize=self.style['ticks_size'])
-				ax[idx].grid(self.style['show_grid'], color=self.style['grid_color'])
+				ax[idx].set_facecolor(self.graphics_style['plot_background'])
+				ax[idx].tick_params(labelsize=self.graphics_style['ticks_size'])
+				ax[idx].grid(self.graphics_style['show_grid'], color=self.graphics_style['grid_color'])
 
 				fig.text(
 					0.5,
 					0.05,
 					xlabel,
 					ha='center',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 				fig.text(
 					0.5,
 					0.95,
 					title,
 					ha='center',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 				fig.text(
 					0.04,
@@ -110,10 +110,10 @@ class GraphicsPlugin(PluginManager):
 					ylabel,
 					va='center',
 					rotation='vertical',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 
-				fig.patch.set_facecolor(self.style['figure_background'])
+				fig.patch.set_facecolor(self.graphics_style['figure_background'])
 
 			# We only want the label to show once if multiple epochs
 			if 'label' in kwargs:
@@ -138,10 +138,10 @@ class GraphicsPlugin(PluginManager):
 			color=None,
 			*args,
 			**kwargs):
-		color = color if color else self.style['line_color']
+		color = color if color else self.graphics_style['line_color']
 
-		if 'plt_style' in self.style.keys():
-			plt.style.use(self.style['plt_style'])
+		if 'plt_style' in self.graphics_style.keys():
+			plt.style.use(self.graphics_style['plt_style'])
 
 		# We will show the graph if no fig or ax is shown. Assuming that this is the desired action.
 		show = False
@@ -175,23 +175,23 @@ class GraphicsPlugin(PluginManager):
 					self.channel_names[idx],
 					fontsize=20
 				)
-				ax[idx].set_facecolor(self.style['plot_background'])
-				ax[idx].tick_params(labelsize=self.style['ticks_size'])
-				ax[idx].grid(self.style['show_grid'], color=self.style['grid_color'])
+				ax[idx].set_facecolor(self.graphics_style['plot_background'])
+				ax[idx].tick_params(labelsize=self.graphics_style['ticks_size'])
+				ax[idx].grid(self.graphics_style['show_grid'], color=self.graphics_style['grid_color'])
 
 				fig.text(
 					0.5,
 					0.05,
 					xlabel,
 					ha='center',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 				fig.text(
 					0.5,
 					0.95,
 					title,
 					ha='center',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 				fig.text(
 					0.04,
@@ -199,10 +199,10 @@ class GraphicsPlugin(PluginManager):
 					ylabel,
 					va='center',
 					rotation='vertical',
-					fontsize=self.style['label_size']
+					fontsize=self.graphics_style['label_size']
 				)
 
-				fig.patch.set_facecolor(self.style['figure_background'])
+				fig.patch.set_facecolor(self.graphics_style['figure_background'])
 
 			# We only want the label to show once if multiple epochs
 			if 'label' in kwargs:
