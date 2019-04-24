@@ -8,6 +8,22 @@ import matplotlib.pyplot as plt
 
 
 class TestGraphicsPlugin(unittest.TestCase):
+	def graphics_set_style_test(self):
+		freq = 10
+		phase = np.pi / 2
+
+		data = {
+			'fs': 512,
+			'num_channels': 2,
+			'channel_names': ['sine1', 'sine2'],
+			'epochs': 2
+		}
+
+		sig = SignalManager(generator=sine_wave(freq=freq, phase=phase, data=data))
+		sig.graphics_set_style('paper')
+
+		sig.graphics_time_plot()
+
 	def graphics_time_plot_test(self):
 		freq = 10
 		phase = np.pi/2
