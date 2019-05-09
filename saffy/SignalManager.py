@@ -127,7 +127,7 @@ class SignalManager(*plugins):
             if not isinstance(channel_name, str):
                 raise ValueError("'channel_name' must be string")
             if not channel_name in self.channel_names:
-                raise ValueError(f"'{channel_name}' not in  be channel_names")
+                raise ValueError(f"'{channel_name}' not in channel_names")
 
             channel_id = self.channel_names.index(channel_name)
             self.data = np.delete(self.data, channel_id, 1)
