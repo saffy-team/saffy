@@ -2,6 +2,7 @@ import numpy as np
 
 import types
 import copy
+import pickle
 
 from saffy.plugins import *
 
@@ -46,7 +47,7 @@ class SignalManager(*plugins):
 
     def set_tags_from_channel(self, channel_name, *, threshold=0.9):
         if isinstance(channel_names, (list, tuple)):
-            raise ValueError("Channel_names must be list or tuple type")
+            raise ValueError("'Channel_names' must be list or tuple type")
 
         tag_channel = self.data[:, self.channel_names.index(channel_name)]
 
@@ -84,7 +85,7 @@ class SignalManager(*plugins):
 
     def remove_channels(self, channel_names):
         if isinstance(channel_names, (list, tuple)):
-            raise ValueError("Channel_names must be list or tuple type")
+            raise ValueError("'Channel_names' must be list or tuple type")
         for channel_name in channel_names:
             channel_id = self.channel_names.index(channel_name)
             self.data = np.delete(self.data, channel_id, 1)
@@ -95,7 +96,7 @@ class SignalManager(*plugins):
 
     def extract_channels(self, channel_names):
         if isinstance(channel_names, (list, tuple)):
-            raise ValueError("Channel_names must be list or tuple type")
+            raise ValueError("'Channel_names' must be list or tuple type")
         channel_ids = [
             self.channel_names.index(channel_name)
             for channel_name in channel_names
@@ -114,7 +115,7 @@ class SignalManager(*plugins):
         if not high > low:
             raise ValueError("'high' must me lower than 'low'")
 
-          low_samp = low * self.fs
+        low_samp = low * self.fs
         high_samp = high * self.fs
 
         self.t = np.arange(low, high, 1 / self.fs)
@@ -133,6 +134,10 @@ class SignalManager(*plugins):
             't': copy.copy(self.t),
             'tags': copy.copy(self.tags)
         })
+
+    def save(self, file_name):
+        with open(file_name, 'wb') as f:
+            pickle.dump(self.__dict__, f, 2)
 
     def call(self, func):
         func(self)
