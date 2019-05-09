@@ -52,9 +52,9 @@ class TestSignalManager(unittest.TestCase):
 
         sig = SignalManager(sine_wave())
 
-        sig.remove_channels(['sine'])
+        sig.remove_channels('sine')
 
-        self.assertEqual(["remove_channels(['sine'], )"], sig.history)
+        self.assertEqual(["remove_channels('sine', )"], sig.history)
 
     def extract_channel_test(self):
         data = {
@@ -66,10 +66,10 @@ class TestSignalManager(unittest.TestCase):
 
         sig = SignalManager(generator=sine_wave(data=data))
 
-        sig.extract_channels(['sine2', 'sine3'])
+        sig.extract_channels(*['sine2', 'sine3'])
 
         self.assertEqual(sig.num_channels, 2)
-        self.assertEqual(sig.channel_names, ['sine2', 'sine3'])
+        self.assertEqual(sig.channel_names, *['sine2', 'sine3'])
         self.assertEqual(sig.data.shape, (1, 2, 10240))
 
     def extract_time_range_test(self):
