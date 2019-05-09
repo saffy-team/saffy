@@ -45,6 +45,36 @@ class SignalManager(*plugins):
 
         return method
 
+    def __getitem__(self, index):
+
+        if isinstance(index, str):
+            if not index in self.channel_names:
+                raise TypeError("'index' not in 'channel_names'")
+            return self.data[self.channel_names.index(index)]
+
+        elif isinstance(index, (list, tuple)):
+            slices = []
+            for i in index:
+                if not i in self.channel_names:
+                    raise TypeError("'index' not in 'channel_names'")
+                slices.append(self.channel_names.index(i))
+            return self.data[slices]
+
+        elif isinstance(index, int):
+            if index > len(self):
+                raise TypeError("index out of range")
+            return self.data[index]
+
+        elif isinstance(index, slice):
+            start, stop, step = index.indices(len(self))    # index is a slice
+            stop = min(len(self), stop)
+            return self.data[start: stop:step]
+        else:
+            raise TypeError("index must be str or slice")
+
+    def __len__(self):
+        return self.num_channels
+
     def set_tags_from_channel(self, channel_name, *, threshold=0.9):
         if isinstance(channel_names, (list, tuple)):
             raise ValueError("'Channel_names' must be list or tuple type")
