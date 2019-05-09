@@ -45,6 +45,9 @@ class SignalManager(*plugins):
         return method
 
     def set_tags_from_channel(self, channel_name):
+        if isinstance(channel_names, (list, tuple)):
+            raise ValueError("Channel_names must be list or tuple type")
+
         tag_channel = self.data[:, self.channel_names.index(channel_name)]
 
         tag_channel = tag_channel / np.max(tag_channel)
@@ -77,6 +80,8 @@ class SignalManager(*plugins):
         return self
 
     def remove_channels(self, channel_names):
+        if isinstance(channel_names, (list, tuple)):
+            raise ValueError("Channel_names must be list or tuple type")
         for channel_name in channel_names:
             channel_id = self.channel_names.index(channel_name)
             self.data = np.delete(self.data, channel_id, 1)
@@ -86,6 +91,8 @@ class SignalManager(*plugins):
         return self
 
     def extract_channels(self, channel_names):
+        if isinstance(channel_names, (list, tuple)):
+            raise ValueError("Channel_names must be list or tuple type")
         channel_ids = [
             self.channel_names.index(channel_name)
             for channel_name in channel_names
