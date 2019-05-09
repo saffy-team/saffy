@@ -69,7 +69,7 @@ class SignalManager(*plugins):
             return self.data[slices]
 
         elif isinstance(index, int):
-            if index > len(self):
+            if index >= len(self) or index < 0:
                 raise ValueError("index out of range")
             return self.data[index]
 
