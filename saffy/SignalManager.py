@@ -44,7 +44,7 @@ class SignalManager(*plugins):
 
         return method
 
-    def set_tags_from_channel(self, channel_name):
+    def set_tags_from_channel(self, channel_name, *, threshold=0.9):
         if isinstance(channel_names, (list, tuple)):
             raise ValueError("Channel_names must be list or tuple type")
 
@@ -52,7 +52,7 @@ class SignalManager(*plugins):
 
         tag_channel = tag_channel / np.max(tag_channel)
 
-        self.tags = np.where(tag_channel > 0.9)[1]
+        self.tags = np.where(tag_channel > threshold)[1]
 
         self.tags = self.tags[
             np.concatenate(([0], np.where(np.diff(self.tags) > 1)[0] + 1))
@@ -61,6 +61,9 @@ class SignalManager(*plugins):
         return self
 
     def set_epochs_from_tags(self, low, high):
+        if not high > low:
+            raise ValueError("'high' must me lower than 'low'")
+
         self.t = np.arange(low, high, 1 / self.fs)
 
         low = int(low * self.fs)
@@ -108,7 +111,10 @@ class SignalManager(*plugins):
         return self
 
     def extract_time_range(self, low, high):
-        low_samp = low * self.fs
+        if not high > low:
+            raise ValueError("'high' must me lower than 'low'")
+
+          low_samp = low * self.fs
         high_samp = high * self.fs
 
         self.t = np.arange(low, high, 1 / self.fs)
