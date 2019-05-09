@@ -30,6 +30,12 @@ class SignalManager(*plugins):
         self.tags = generator.get('tags', list())
 
     def __getattribute__(self, attr):
+
+        # TODO
+        # add condition that len == 0 ==> self.data = None // reset of array
+        # grabing function results
+        # if results, return results, else return delault self
+        # remove return of self from functions
         def call_history(method):
             def out(*args, **kwargs):
                 _args = [arg.__repr__() for arg in args]
@@ -80,7 +86,7 @@ class SignalManager(*plugins):
 
     def set_tags_from_channel(self, channel_name, *, threshold=0.9):
         if isinstance(channel_names, (list, tuple)):
-            raise ValueError("'Channel_names' must be list or tuple type")
+            raise ValueError("'channel_names' must be list or tuple type")
 
         tag_channel = self.data[:, self.channel_names.index(channel_name)]
 
@@ -116,10 +122,13 @@ class SignalManager(*plugins):
 
         return self
 
-    def remove_channels(self, channel_names):
-        if isinstance(channel_names, (list, tuple)):
-            raise ValueError("'Channel_names' must be list or tuple type")
+    def remove_channels(self, *channel_names):
         for channel_name in channel_names:
+            if not isinstance(channel_name, str):
+                raise ValueError("'channel_name' must be string")
+            if not channel_name in self.channel_names:
+                raise ValueError(f"'{channel_name}' not in  be channel_names")
+
             channel_id = self.channel_names.index(channel_name)
             self.data = np.delete(self.data, channel_id, 1)
             del self.channel_names[channel_id]
@@ -129,7 +138,7 @@ class SignalManager(*plugins):
 
     def extract_channels(self, channel_names):
         if isinstance(channel_names, (list, tuple)):
-            raise ValueError("'Channel_names' must be list or tuple type")
+            raise ValueError("'channel_names' must be list or tuple type")
         channel_ids = [
             self.channel_names.index(channel_name)
             for channel_name in channel_names
