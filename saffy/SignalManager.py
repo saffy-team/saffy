@@ -172,6 +172,14 @@ class SignalManager(*plugins):
         with open(file_name, 'wb') as f:
             pickle.dump(self.__dict__, f, 2)
 
+    @classmethod
+    def load(self, file_name):
+        # TODO some check if data is valid
+        with open(file_name, 'rb') as f:
+            data = pickle.load(f)
+
+        return SignalManager(name='', generator=data)
+
     def call(self, func):
         func(self)
         return self
