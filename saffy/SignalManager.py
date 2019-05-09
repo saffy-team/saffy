@@ -19,6 +19,8 @@ class SignalManager(*plugins):
         self.fs = generator['fs']
 
         self.num_channels = generator['num_channels']
+        if len(generator['channel_names']) != len(set(generator['channel_names'])):
+            raise ValueError("Channel names must be unique")
         self.channel_names = generator['channel_names']
 
         self.data = generator['data']
@@ -49,24 +51,25 @@ class SignalManager(*plugins):
 
         if isinstance(index, str):
             if not index in self.channel_names:
-                raise TypeError("'index' not in 'channel_names'")
+                raise ValueError("'index' not in 'channel_names'")
             return self.data[self.channel_names.index(index)]
 
         elif isinstance(index, (list, tuple)):
             slices = []
             for i in index:
                 if not i in self.channel_names:
-                    raise TypeError("'index' not in 'channel_names'")
+                    raise ValueError("'index' not in 'channel_names'")
                 slices.append(self.channel_names.index(i))
             return self.data[slices]
 
         elif isinstance(index, int):
             if index > len(self):
-                raise TypeError("index out of range")
+                raise ValueError("index out of range")
             return self.data[index]
 
         elif isinstance(index, slice):
             start, stop, step = index.indices(len(self))    # index is a slice
+            # TODO warning when clipping stop
             stop = min(len(self), stop)
             return self.data[start: stop:step]
         else:
