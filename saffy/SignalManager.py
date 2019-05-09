@@ -206,3 +206,11 @@ class SignalManager(*plugins):
 
     def __repr__(self):
         return 'Signal Manager'
+
+    @property
+    def size(self):
+        return self.data.size
+
+    @property
+    def shape(self):
+        return self.data.shape
