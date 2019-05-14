@@ -26,6 +26,10 @@ class SignalManager(*plugins):
         self.epochs = generator['epochs']
         self.tags = generator.get('tags', [])
 
+    @property
+    def samples(self):
+        return self.data.shape[-1]
+
     def __getattribute__(self, attr):
         def call_history(method):
             def out(*args, **kwargs):

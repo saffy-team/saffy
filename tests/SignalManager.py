@@ -100,6 +100,24 @@ class TestSignalManager(unittest.TestCase):
         sig.extract_time_range(0, 2)\
             .extract_time_range(0, 1)
 
+    def samples_property_test(self):
+        t = 20
+
+        data = {
+            'fs': 512,
+            'num_channels': 1,
+            'channel_names': ['sine1'],
+            'epochs': 1
+        }
+
+        sig = SignalManager(T=t, generator=sine_wave(data=data))
+
+        self.assertEqual(sig.samples, data['fs'] * t)
+
+        t = 1
+        sig.extract_time_range(0, t)
+        self.assertEqual(sig.samples, data['fs'] * t)
+
 
 if __name__ == '__main__':
     unittest.main()
