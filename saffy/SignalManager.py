@@ -3,15 +3,14 @@ import numpy as np
 import types
 import copy
 
-from saffy.plugins import *
+from saffy.plugins import PluginManager
 
 plugins = PluginManager.__subclasses__()
 
 
 class SignalManager(*plugins):
     def __init__(self, generator, name='', *args, **kwargs):
-        for plugin in SignalManager.__bases__:
-            super(plugin, self).__init__(*args, **kwargs)
+        super(SignalManager, self).__init__(*args, **kwargs)
 
         self.name = name
 

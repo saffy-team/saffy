@@ -5,7 +5,7 @@ import scipy.signal as ss
 import numpy as np
 
 
-class TestFourierPlugin(unittest.TestCase):
+class TestWelchPlugin(unittest.TestCase):
 	def welch_spectrum_test(self):
 		freq = 50
 		phase = np.pi/2
@@ -41,6 +41,7 @@ class TestFourierPlugin(unittest.TestCase):
 		mean_spec = np.mean(spec, 0)
 
 		self.assertTrue(np.allclose(sig.spectrum, mean_spec))
+
 
 if __name__ == '__main__':
 	unittest.main()
