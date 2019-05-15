@@ -5,14 +5,14 @@ def sin(t, f, p):
 	return np.sin(2 * np.pi * f * t + p)
 
 
-def simple_sine(freq=10, phase=0, length=20, sampling_frequency=512, data=None):
-	if not data:
-		data = {
-			'fs': sampling_frequency,
-			'num_channels': 1,
-			'channel_names': ['sine'],
-			'epochs': 1
-		}
+def simple_sine(freq=10, phase=0, length=20, sampling_frequency=512, data={}):
+	data = {
+		'fs': sampling_frequency,
+		'num_channels': 1,
+		'channel_names': ['sine'],
+		'epochs': 1,
+		**data
+	}
 
 	t = np.arange(0, length, 1 / data['fs'])
 
