@@ -201,9 +201,3 @@ class FiltersPlugin(PluginManager):
 			self.data = method(self.filters['b'], self.filters['a'], self.data)
 		else:
 			self.data = filtfilt(self.filters['b'], self.filters['a'], self.data)
-
-	def __str__(self):
-		return 'Filters'
-
-	def __repr__(self):
-		return 'Filters'

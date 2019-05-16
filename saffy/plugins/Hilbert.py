@@ -133,9 +133,3 @@ class HilbertPlugin(PluginManager):
 		if show:
 			plt.show()
 			plt.close()
-
-	def __str__(self):
-		return 'Hilbert'
-
-	def __repr__(self):
-		return 'Hilbert'

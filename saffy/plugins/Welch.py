@@ -22,9 +22,3 @@ class WelchPlugin(PluginManager):
 
 		self.spectrum = np.mean(self.spectrum, axis=0)
 		self.spectrum = np.reshape(self.spectrum, (1, *self.spectrum.shape))
-
-	def __str__(self):
-		return 'Welch'
-
-	def __repr__(self):
-		return 'Welch'

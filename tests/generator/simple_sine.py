@@ -3,7 +3,7 @@ import unittest
 from saffy.generators.simple_sine import simple_sine
 
 
-class TestPluginManager(unittest.TestCase):
+class TestSimpleSineGenerator(unittest.TestCase):
 	@staticmethod
 	def smoke_test():
 		simple_sine()

@@ -215,9 +215,3 @@ class GraphicsPlugin(PluginManager):
 		if show:
 			plt.show()
 			plt.close()
-
-	def __str__(self):
-		return 'Graphics'
-
-	def __repr__(self):
-		return 'Graphics'

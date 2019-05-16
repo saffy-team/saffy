@@ -14,9 +14,3 @@ class FourierPlugin(PluginManager):
 		self.phase = np.angle(transform) + np.pi / 2
 
 		self.spectrum_freqs = np.fft.rfftfreq(self.data.shape[2], 1/self.fs)
-
-	def __str__(self):
-		return 'Fourier'
-
-	def __repr__(self):
-		return 'Fourier'
