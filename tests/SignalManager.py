@@ -1,4 +1,6 @@
 import unittest
+import warnings
+import numpy as np
 
 from saffy import PluginManager
 from saffy import SignalManager
@@ -117,6 +119,67 @@ class TestSignalManager(unittest.TestCase):
         t = 1
         sig.extract_time_range(0, t)
         self.assertEqual(sig.samples, data['fs'] * t)
+
+    def set_tags_from_channel_test(self):
+        data = {
+            'fs': 512,
+            'num_channels': 1,
+            'channel_names': ['sine'],
+            'epochs': 1
+        }
+        t = 1
+        freq = 10
+
+        sig = SignalManager(generator=sine_wave(freq=freq, T=t, data=data))
+        sig.set_tags_from_channel('sine')
+
+        self.assertEqual(len(sig.tags), t*freq)
+
+    def set_epochs_from_tags_test(self):
+        data = {
+            'fs': 512,
+            'num_channels': 1,
+            'channel_names': ['sine'],
+            'epochs': 1
+        }
+        t = 1
+        freq = 10
+
+        sig = SignalManager(generator=sine_wave(freq=freq, T=t, data=data))
+        sig.set_tags_from_channel('sine')
+        sig.set_epochs_from_tags(-.01, .01)
+
+        self.assertEqual(len(sig.tags), 0)
+        self.assertEqual(sig.epochs, t*freq)
+
+        with warnings.catch_warnings(record=True) as w:
+            sig = SignalManager(generator=sine_wave(freq=freq, T=t, data=data))
+            sig.set_tags_from_channel('sine')
+            sig.set_epochs_from_tags(-.1, .1)
+
+            self.assertEqual(len(w), 1)
+
+    def call_test(self):
+        sig = SignalManager(generator=sine_wave())
+
+        def divide(self):
+            self.data /= 10
+
+        before = np.max(sig.data)
+        sig.call(divide)
+        after = np.max(sig.data)
+
+        self.assertEqual(after, before / 10)
+
+    def copy_test(self):
+        sig1 = SignalManager(generator=sine_wave())
+        sig2 = sig1.copy()
+
+        self.assertTrue(np.equal(sig1.data, sig2.data).all())
+
+        sig1.data = sig1.data / 10
+
+        self.assertFalse(np.equal(sig1.data, sig2.data).all())
 
 
 if __name__ == '__main__':

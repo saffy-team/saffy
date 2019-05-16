@@ -1,4 +1,5 @@
 import numpy as np
+import warnings
 
 import types
 import copy
@@ -72,7 +73,10 @@ class SignalManager(*plugins):
         self.epochs = len(self.tags)
 
         for idx, tag in enumerate(self.tags):
-            data[idx] = self.data[:, :, tag + low: tag + high]
+            if tag + low > 0 and tag + high < self.data.shape[2]:
+                data[idx] = self.data[:, :, tag + low: tag + high]
+            else:
+                warnings.warn('Chosen width exceeds data array')
 
         self.data = data
         self.tags = []
@@ -135,9 +139,3 @@ class SignalManager(*plugins):
                 lambda x: str(x) != str(plugin),
                 cls.__bases__))
         cls.__bases__ = (*cls.__bases__, plugin)
-
-    def __str__(self):
-        return 'Signal Manager'
-
-    def __repr__(self):
-        return 'Signal Manager'
